@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.title {
+  font-family: "River";
+  font-size: 12vw;
+  -webkit-text-stroke: 1px #294b0f;
+  color: #4ce247;
+}
+
+.start-button {
+  background-color: #3f6829 ;
+  color: white;
+  padding: 10px 45px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: medium;
+  letter-spacing: 1px;
+  border: 1px #4B7F30 solid;
+}
