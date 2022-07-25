@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import styles from "./index.module.css";
+import Button from "../button";
 
 export default function Home() {
   return (
@@ -14,13 +15,15 @@ export default function Home() {
           stiffness: 280,
           damping: 10,
         }}
-        className={styles["title"]}
+        className={styles["game-title"]}
       >
         WORD DASH
       </motion.h1>
-      <Link href="/start">
-        <a className={styles["start-button"]}>start</a>
-      </Link>
+      <div>
+        <Link href="/start">
+          <Button>Play</Button>
+        </Link>
+      </div>
     </div>
   );
 }

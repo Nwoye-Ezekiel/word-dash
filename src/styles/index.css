@@ -1,3 +1,15 @@
+:root {
+  --primary-color: #008000;
+  --primary-color-dark: #294b0f;
+  --primary-color-light: #01a501;
+  --primary-color-lighter: #00c400;
+  --background-color: #8bc242;
+  --white-color: #f6f6f6;
+  --black-color: #000000cc;
+  --yellow-color: yellow;
+  --error-color: #ff4141;
+}
+
 @font-face {
   font-family: nunito;
   src: url("./fonts/Nunito-Regular.ttf");
@@ -7,13 +19,13 @@
   font-family: "River";
   font-weight: 400;
   src: url("./fonts/River-Adventurer.ttf") format("truetype");
-  font-display: swap;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  color: var(--black-color);
   font-family: nunito;
 }
 
@@ -30,7 +42,7 @@ body {
   width: 100%;
   height: 100%;
   font-family: Segoe UI, Helvetica, sans-serif;
-  background-color: #8bc242;
+  background-color: var(--background-color);
 }
 
 .loader-container {
@@ -60,23 +72,6 @@ body {
   animation: dots 2s linear infinite;
   content: "";
 }
-
-.modal-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  overflow-y: auto; 
-}
-
 
 @keyframes dots {
   0%,

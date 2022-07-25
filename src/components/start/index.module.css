@@ -1,30 +1,94 @@
-.container {
+.main-container {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
   display: flex;
+  position: fixed;
+  overflow-y: auto;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.countdown {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--white-color);
+}
+
+.red {
+  color: var(--error-color);
+}
+
+.yellow {
+  color: var(--yellow-color);
 }
 
 .displays-container {
-  width: 60%;
-  border: rgb(255, 255, 255) solid;
-  border-radius: 10px;
+  margin: 20px;
   padding: 20px;
+  border-radius: 10px;
+  border: var(--white-color) solid;
+}
+
+.completion-bar-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+  border: var(--white-color) solid;
+  border-radius: 15px;
+  height: 20px;
+}
+
+.bar {
+  background-color: var(--primary-color-lighter);
+  border-radius: 10px;
+}
+
+.output-wrapper {
+  position: relative;
+}
+
+.output-display {
+  width: 100%;
+  min-height: 150px;
+  font-size: 20px;
+  position: relative;
+  border-radius: 5px;
+  padding: 15px 20px 40px;
+  margin-bottom: 10px;
+  background-color: var(--white-color);
+}
+
+.fetch-quote {
+  position: absolute;
+  cursor: pointer;
+  bottom: 10px;
+  right: 10px;
+  padding: 2px 10px;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-radius: 5px;
+  font-size: 13px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .input-display {
-  width: 100%;
-  height: 150px;
-  padding: 20px;
-  font-size: 20px;
-  resize: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  padding: 15px 20px;
-  outline: 0;
   border: 0;
+  outline: 0;
+  width: 100%;
+  resize: none;
+  height: 150px;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 15px 20px;
 }
 
 .action-buttons {
@@ -32,37 +96,16 @@
   margin-top: 20px;
 }
 
-.output-display {
-  position: relative;
-  width: 100%;
-  height: 150px;
-  font-size: 20px;
-  background-color: white;
-  border-radius: 5px;
-  padding: 15px 20px;
-  margin-bottom: 10px;
-}
-
-.displayOptions {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  height: 30px;
-  width: 50px;
-}
 .correct {
-  color: green;
-}
-.incorrect {
-  color: red;
-}
-.normal {
-  color: black;
+  color: var(--primary-color-lighter);
 }
 
-.countdown {
-  font-size: 40px;
-  font-weight: bold;
-  color: white;
-  margin-bottom: 5px;
+.incorrect {
+  color: var(--error-color);
+}
+
+@media screen and (min-width: 768px) {
+  .displays-container {
+    width: 60%;
+  }
 }

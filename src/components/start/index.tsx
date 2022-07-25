@@ -23,30 +23,28 @@ export default function Start() {
   const [timer, setTimer] = useState(DEFAULT_TIME)
   const [countdown, setCountdown] = useState(timer)
   const textInput = useRef<HTMLTextAreaElement>(null)
-
-  const handleTimeChange = (timer: number) => {
-    setTimer(timer);
-    setCountdown(timer);
-  };
-
+  
   useEffect(() => {
     generateNewQuote();
   }, []);
 
   useEffect(() => {
-    if (status === "started") {
-      textInput.current?.focus();
-    }
+    if (status === "started") textInput.current?.focus();
   }, [status]);
 
   const generateNewQuote = async () => {
     const quote = await fetchRandomQuote();
-    createCustomWords(quote);
+    createQuote(quote);
   };
 
-  const createCustomWords = (words: string) => {
+  const createQuote = (words: string) => {
     setCustomWords(words);
     setDisplayedWords(words?.split(" "));
+  };
+
+  const handleTimerChange = (timer: number) => {
+    setTimer(timer);
+    setCountdown(timer);
   };
 
   const handleKeyDown = ({ keyCode }: { keyCode: number }) => {
@@ -125,11 +123,21 @@ export default function Start() {
   }
  
   return (
-    <div className={`modal-container ${styles["container"]}`}>
-          <p className={styles["countdown"]}>{countdown}</p>
+    <div className={styles["main-container"]}>
+          <p className={`${styles["countdown"]} ${styles[`${countdown <= 5 ? 'red' : countdown <= 10 ? 'yellow' : ''}`]}`}>{countdown}</p>
           <div className={styles["displays-container"]}>
+            <div className={styles["completion-bar-container"]}>
+              <div
+                className={styles["bar"]}
+                style={{
+                  width: `${Math.round((displayedWordIndex / displayedWords.length) * 100)}%`,
+                }}
+              >
+              </div>
+          </div>
+          <div className={styles["output-wrapper"]}>
             <div className={styles["output-display"]}>
-              {displayedWords.map((word, wordIndex) => (
+              {displayedWords?.map((word, wordIndex) => (
                 <span key={wordIndex}>
                   <span>
                     {word.split("").map((character, characterIndex) => (
@@ -147,6 +155,8 @@ export default function Start() {
                 </span>
               ))}
             </div>
+           {status !== "started" && <p className={styles["fetch-quote"]} onClick={() => generateNewQuote()}>fetch new quote</p>}
+          </div>
             <textarea
               ref={textInput}
               value={typedCharacters}
@@ -158,17 +168,17 @@ export default function Start() {
             />
           </div>
           <div className={styles["action-buttons"]}>
-            <Button onClick={() => setSetupModal(true)}>setup</Button>
+            <Button disabled={status === 'started'} variant="outline" onClick={() => setSetupModal(true)}>setup</Button>
             <Spacer width={30}/>
-            <Button onClick={start} fill="primary">start</Button>
+            <Button disabled={status === 'started'} onClick={start} fill="primary">start</Button>
           </div>
           {setupModal && (
             <SetupModal
               timer={timer}
-              createTimer={handleTimeChange}
+              createTimer={handleTimerChange}
               close={() => setSetupModal(false)}
               customWords={customWords}
-              createCustomWords={createCustomWords}
+              createQuote={createQuote}
             />
           )}
           {completionModal && (
@@ -176,7 +186,9 @@ export default function Start() {
               timeElapsed={timer - countdown}
               close={() => setCompletionModal(false)}
               totalWords={displayedWords.length}
+              totalTyped={displayedWordIndex}
               correctScore={correctScore}
+              restart={resetGame}
             />
           )}
         </div>

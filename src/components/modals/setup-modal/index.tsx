@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./index.module.css";
 import ModalTemplate from "..";
@@ -8,7 +7,7 @@ interface SetupModalProps {
   customWords: string;
   timer: number;
   createTimer: (value: number) => void;
-  createCustomWords: (value: string) => void;
+  createQuote: (value: string) => void;
   close: () => void;
 }
 
@@ -20,7 +19,7 @@ export default function SetupModal({
   customWords,
   timer,
   createTimer,
-  createCustomWords,
+  createQuote,
   close,
 }: SetupModalProps) {
   const options = [30, 60, 120, 180];
@@ -44,7 +43,7 @@ export default function SetupModal({
   };
 
   const handleAppliedChanges = () => {
-    createCustomWords(inputChanges);
+    createQuote(inputChanges);
     createTimer(editMode ? 60 * editedMin + editedSec : selectedOption);
     close();
   };
@@ -58,7 +57,9 @@ export default function SetupModal({
             defaultValue={customWords}
             onChange={(e) => setInputChanges(e.target.value)}
             className={styles["input-container"]}
+            maxLength={300}
           />
+          <div className={styles["character-count"]}>{inputChanges.length}</div>
         </div>
         <div className={styles["timer-wrapper"]}>
           <div className={styles["timer-header"]}>
@@ -67,7 +68,7 @@ export default function SetupModal({
               className={styles["mode"]}
               onClick={() => handleEditModeChange()}
             >
-              change mode
+              {editMode ? "select options" : "customize timer"}
             </p>
           </div>
           <ul className={styles["timer-container"]}>
@@ -118,7 +119,9 @@ export default function SetupModal({
             (!customTimer &&
               selectedOption === timer &&
               inputChanges === customWords) ||
-            (editedMin === 0 && editedSec === 0 && selectedOption === 0)
+            (editedMin === 0 && editedSec === 0 && selectedOption === 0) ||
+            editedMin < 0 ||
+            editedSec < 0
           }
           onClick={handleAppliedChanges}
           fill={"primary"}

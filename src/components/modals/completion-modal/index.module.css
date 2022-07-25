@@ -1,0 +1,34 @@
+.main-container {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.stat-container p {
+  font-size: 18px;
+}
+
+.action-buttons {
+  display: flex;
+  margin-top: 15px;
+}
+
+.good {
+  color: var(--primary-color-lighter);
+}
+
+.bad {
+  color: var(--error-color);
+}

@@ -1,4 +1,5 @@
 .button {
+  min-width: 130px;
   width: 100%;
   padding: 10px 30px;
   height: 45px;
@@ -15,11 +16,11 @@
   background-image: linear-gradient(
     to right,
     var(--primary-color) 0%,
-    #6586fd 51%,
+    var(--primary-color-light) 51%,
     var(--primary-color) 100%
   );
-  transition: 0.5s;
   background-size: 200% auto;
+  transition: 0.2s;
 }
 
 .solid:hover {
@@ -27,32 +28,29 @@
 }
 
 .outline {
-  border: 1px solid var(--primary-color);
+  border: 1px solid var(--white-color);
   background: none;
-  color: var(--primary-color);
-  transition: 0.5s;
+  color: var(--white-color);
+  transition: 0.2s;
 }
 
 .outline:hover {
-  background: var(--primary-color);
-  color: var(--white-color);
-  background-image: linear-gradient(
-    to right,
-    var(--primary-color) 0%,
-    #6586fd 51%,
-    var(--primary-color) 100%
-  );
-  background-size: 200% auto;
-  border: none;
+  background: var(--white-color);
+  color: var(--primary-color);
 }
 
-.button:disabled:hover,
-.button[disabled]:hover {
+.button:disabled {
   background-position: inherit;
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
-.primary{
-    background-color: green;
-    color: white;
+.outline:disabled:hover {
+  background: none;
+  color: var(--white-color);
+}
+
+.primary {
+  background-color: var(--primary-color);
+  color: var(--white-color);
 }

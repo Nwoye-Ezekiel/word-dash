@@ -6,7 +6,7 @@ interface ButtonProps {
   fill?: string;
   children: JSX.Element | string;
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export default function Button({
