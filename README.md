@@ -33,3 +33,11 @@ You can as well view the project which is hosted on [vercel](https://vercel.com/
 
 This project is a skill typing game that tests your typing abilities by having you enter produced quotes obtained from an API. Additionally, it contains a number of incredible features that let you customize the game to your liking, such as the ability to choose or make your own timer, create custom quotes, and more. Hope you like it and have fun with it!
 
+# Images
+
+![1](https://user-images.githubusercontent.com/57937355/180829524-5f87f05f-c195-479c-8195-4cfcaa02eb22.PNG)
+![image](https://user-images.githubusercontent.com/57937355/180830818-04fbf2b9-7384-4c91-9894-b626b49462bd.png)
+![image](https://user-images.githubusercontent.com/57937355/180831099-500f6696-54b4-43a0-830c-29a5bb5cc20f.png)
+![image](https://user-images.githubusercontent.com/57937355/180831169-60c1313c-e5e4-4832-a209-b3493a368dd4.png)
+![image](https://user-images.githubusercontent.com/57937355/180831284-36cb349b-833f-4498-9dc1-7fc7c3b6bf91.png)
+
