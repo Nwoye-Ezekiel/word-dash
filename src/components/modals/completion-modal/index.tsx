@@ -20,10 +20,9 @@ export default function CompletionModal({
   totalWords,
   totalTyped,
   correctScore,
-  timeElapsed,
   restart,
 }: CompletionModalProps) {
-  const accuracy = Math.round((correctScore / totalTyped) * 100);
+  const accuracy = totalTyped ? Math.round((correctScore / totalTyped) * 100) : 0;
   const handleRestart = () => {
     restart();
     close();

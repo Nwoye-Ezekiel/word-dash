@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className={styles["container"]}>
       <span className={styles["logo-wrapper"]}>
-        <Image src={require("../../assets/images/logo1.svg")} alt="logo" />
+        <Image src={require("../../assets/images/logo.svg")} alt="logo" />
       </span>
       <div>
         <Link href="/start">
