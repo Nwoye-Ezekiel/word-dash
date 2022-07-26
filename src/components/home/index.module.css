@@ -11,5 +11,5 @@
   font-size: 12vw;
   font-family: "River";
   color: var(--primary-color-lighter);
-  -webkit-text-stroke: 1px var(--primary-color-dark);
+  -webkit-text-stroke: 6px var(--primary-color-dark);
 }
