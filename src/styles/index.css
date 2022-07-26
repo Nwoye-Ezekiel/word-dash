@@ -27,6 +27,7 @@
   margin: 0;
   color: var(--black-color);
   font-family: nunito;
+  font-weight: 400;
 }
 
 html,
