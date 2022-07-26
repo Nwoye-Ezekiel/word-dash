@@ -114,8 +114,8 @@
   .displays-container {
     width: 60%;
     padding: 20px;
-    background: #ededed;
-    color: white;
+    background: var(--primary-color-light);
+    color: var(--white-color);
   }
 
   .countdown {
