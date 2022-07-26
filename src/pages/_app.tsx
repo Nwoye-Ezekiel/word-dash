@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Word Dash</title>
         <link rel="preload" as="image" href="../assets/images/liquid.svg" />
+        <link rel="preload" as="image" href="../../assets/images/logo1.svg" />
       </Head>
       <span className="image-wrapper">
         <Image
