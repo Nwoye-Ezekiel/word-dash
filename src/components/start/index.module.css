@@ -137,4 +137,12 @@
   .initial-color {
     color: var(--white-color);
   }
+
+  .correct {
+    color: var(--primary-color-lighter);
+  }
+  
+  .incorrect {
+    color: var(--error-color);
+  }
 }
