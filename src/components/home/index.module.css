@@ -8,8 +8,16 @@
 }
 
 .game-title {
-  font-size: 12vw;
+  margin-bottom: 20px;;
+  font-size: 17vw;
   font-family: "River";
   color: var(--primary-color-lighter);
-  -webkit-text-stroke: 6px var(--primary-color-dark);
+  -webkit-text-stroke: 3px var(--primary-color-dark);
+}
+
+@media screen and (min-width: 768px) {
+  .game-title {
+    font-size: 12vw;
+    -webkit-text-stroke: 5px var(--primary-color-dark);
+  }
 }
