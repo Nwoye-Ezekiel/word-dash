@@ -31,10 +31,9 @@
 }
 
 .displays-container {
+  width: 90%;
   margin: 20px;
-  padding: 20px;
   border-radius: 10px;
-  border: var(--white-color) solid;
 }
 
 .completion-bar-container {
@@ -42,9 +41,9 @@
   width: 100%;
   display: flex;
   margin-bottom: 20px;
-  border: var(--white-color) solid;
+  border: 1.5px var(--white-color) solid;
   border-radius: 15px;
-  height: 20px;
+  height: 15px;
 }
 
 .bar {
@@ -107,5 +106,12 @@
 @media screen and (min-width: 768px) {
   .displays-container {
     width: 60%;
+    padding: 20px;
+    border: var(--white-color) solid;
+  }
+
+  .completion-bar-container {
+    border: var(--white-color) solid;
+    height: 20px;
   }
 }
