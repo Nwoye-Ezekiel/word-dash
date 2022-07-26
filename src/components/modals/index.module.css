@@ -37,6 +37,10 @@
   justify-content: center;
 }
 
+.modal-header {
+  font-family: nunito-b;
+}
+
 .icon-wrapper {
   top: 0;
   right: 0;

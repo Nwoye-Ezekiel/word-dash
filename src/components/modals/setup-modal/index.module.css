@@ -8,7 +8,7 @@
 
 .label {
   font-size: 16px;
-  font-weight: 600;
+  font-family: nunito-b;
   margin-bottom: 5px;
 }
 
@@ -119,5 +119,5 @@
 .colon-separator {
   padding-bottom: 2px;
   font-size: 20px;
-  font-weight: bold;
+  font-family: nunito-b;
 }

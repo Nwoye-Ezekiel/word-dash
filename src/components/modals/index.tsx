@@ -19,7 +19,7 @@ export default function ModalTemplate({
     <div className={styles["modal-wrapper"]}>
       <div className={styles["modal-container"]}>
         <div className={styles["header-container"]}>
-          <h2>{header}</h2>
+          <h2 className={styles["modal-header"]}>{header}</h2>
           {icon && (
             <motion.span
               whileHover={{ scale: 1.1, rotate: 90 }}

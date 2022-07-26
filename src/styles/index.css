@@ -11,13 +11,17 @@
 }
 
 @font-face {
-  font-family: nunito;
+  font-family: nunito-r;
   src: url("./fonts/Nunito-Regular.ttf");
 }
 
 @font-face {
+  font-family: nunito-b;
+  src: url("./fonts/Nunito-SemiBold.ttf");
+}
+
+@font-face {
   font-family: "River";
-  font-weight: 400;
   src: url("./fonts/River-Adventurer.ttf") format("truetype");
 }
 
@@ -26,7 +30,7 @@
   padding: 0;
   margin: 0;
   color: var(--black-color);
-  font-family: nunito;
+  font-family: nunito-r;
   font-weight: 400;
 }
 
