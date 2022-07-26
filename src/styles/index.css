@@ -1,5 +1,5 @@
 :root {
-  --background-color: #8bc242;
+  --background-color: #28B536;
   --primary-color-dark: #294b0f;
   --primary-color: #018b01;
   --primary-color-light: #01a501;
@@ -69,7 +69,8 @@ body {
 .background-image {
   position: fixed;
   object-fit: cover;
-  object-position: center;
+  /* object-position: center;
+  object-position: center; */
   z-index: -1;
   left: 0;
   top: 0;

@@ -11,12 +11,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Word Dash</title>
-        <link rel="preload" as="image" href="../assets/images/background.jpg" />
+        <link rel="preload" as="image" href="../assets/images/liquid.svg" />
       </Head>
       <span className="image-wrapper">
         <Image
           className="background-image"
-          src={require("../assets/images/background.jpg")}
+          src={require("../assets/images/liquid.svg")}
           alt="Background Image"
           layout="fill"
           onLoad={() => setIsImageLoading(false)}

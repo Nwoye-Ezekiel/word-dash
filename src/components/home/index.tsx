@@ -21,7 +21,7 @@ export default function Home() {
       </motion.h1>
       <div>
         <Link href="/start">
-          <Button>Play</Button>
+          <Button>Play Game</Button>
         </Link>
       </div>
     </div>

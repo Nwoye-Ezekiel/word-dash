@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./index.module.css";
 
 interface ButtonProps {
-  variant?: string;
+  variant?: 'solid' | 'outline';
   fill?: string;
   children: JSX.Element | string;
   disabled?: boolean;
