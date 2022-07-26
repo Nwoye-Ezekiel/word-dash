@@ -16,7 +16,7 @@
 }
 
 .countdown {
-  font-size: 30px;
+  font-size: 40px;
   margin-bottom: 5px;
   font-family: nunito-b;
   color: var(--white-color);
@@ -37,18 +37,18 @@
 }
 
 .completion-bar-container {
-  position: relative;
   width: 100%;
   display: flex;
-  margin-bottom: 20px;
-  border: 1.5px var(--white-color) solid;
-  border-radius: 15px;
-  height: 15px;
+  border-radius: 5px;
+  height: 6px;
+  overflow: hidden;
+  background-color: #ededed;
+  margin-bottom: 15px;
 }
 
 .bar {
+  border-radius: 5px;
   background-color: var(--primary-color-lighter);
-  border-radius: 10px;
 }
 
 .output-wrapper {
@@ -64,6 +64,7 @@
   padding: 15px 20px 40px;
   margin-bottom: 10px;
   background-color: var(--white-color);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 .fetch-quote {
@@ -88,11 +89,17 @@
   font-size: 20px;
   border-radius: 5px;
   padding: 15px 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: #d6e2d6;
 }
 
 .action-buttons {
   display: flex;
   margin-top: 20px;
+}
+
+.initial-color {
+  color: var(--black-color);
 }
 
 .correct {
@@ -107,12 +114,8 @@
   .displays-container {
     width: 60%;
     padding: 20px;
-    border: var(--white-color) solid;
-  }
-
-  .completion-bar-container {
-    border: var(--white-color) solid;
-    height: 20px;
+    background: #ededed;
+    color: white;
   }
 
   .countdown {
@@ -121,5 +124,17 @@
 
   .output-display {
     font-size: 20px;
+    margin-bottom: 20px;
+    color: var(--white-color);
+    background-color: var(--black-color);
+  }
+
+  .input-display {
+    background-color: var(--black-color);
+    color: var(--white-color);
+  }
+
+  .initial-color {
+    color: var(--white-color);
   }
 }

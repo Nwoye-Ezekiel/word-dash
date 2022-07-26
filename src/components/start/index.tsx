@@ -126,6 +126,8 @@ export default function Start() {
     <div className={styles["main-container"]}>
           <p className={`${styles["countdown"]} ${styles[`${countdown <= 5 ? 'red' : countdown <= 10 ? 'yellow' : ''}`]}`}>{countdown}</p>
           <div className={styles["displays-container"]}>
+          <div className={styles["output-wrapper"]}>
+            <div className={styles["output-display"]}>
             <div className={styles["completion-bar-container"]}>
               <div
                 className={styles["bar"]}
@@ -134,17 +136,13 @@ export default function Start() {
                 }}
               >
               </div>
-          </div>
-          <div className={styles["output-wrapper"]}>
-            <div className={styles["output-display"]}>
+            </div>
               {displayedWords?.map((word, wordIndex) => (
                 <span key={wordIndex}>
                   <span>
                     {word.split("").map((character, characterIndex) => (
                       <span
-                        className={
-                          styles[`${generateStyleClass(wordIndex, characterIndex)}`]
-                        }
+                        className={`${styles["initial-color"]} ${styles[`${generateStyleClass(wordIndex, characterIndex)}`]}`}
                         key={characterIndex}
                       >
                         {character}
