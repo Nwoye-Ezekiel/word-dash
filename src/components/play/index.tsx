@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useCountdown } from 'usehooks-ts'
 import styles from "./index.module.css";
-import { fetchRandomQuote } from "../../api";
+import { fetchRandomQuote } from "../../apis";
 import SetupModal from "../modals/setup-modal";
 import CompletionModal from "../modals/completion-modal";
 import Button from "../button";
