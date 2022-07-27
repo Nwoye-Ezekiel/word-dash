@@ -70,7 +70,7 @@ export default function CompletionModal({
           </div>
         </div>
         <div className={styles["action-buttons"]}>
-          <Button fill="primary" onClick={handleRestart}>
+          <Button variant="solid" onClick={handleRestart}>
             Try again
           </Button>
           <Spacer width={30} />

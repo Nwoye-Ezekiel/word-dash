@@ -138,6 +138,18 @@ export default function Start() {
       startCountdown();
     }
   };
+
+  const stopGame = () => {
+    setStatus("stopped");
+    resetCountdown();
+    setDisplayedWordIndex(0);
+    setTypedCharacters("");
+    setTypedCharacterIndex(-1);
+    setError(false);
+    setCorrectScore(0);
+    setIncorrectScore(0);
+    setInputType("text");
+  }
  
   return (
     <div className={styles["main-container"]}>
@@ -201,17 +213,24 @@ export default function Start() {
         />
       </div>
       <div className={styles["action-buttons"]}>
-        <Button
-          disabled={status === "started"}
-          variant="outline"
-          onClick={() => setSetupModal(true)}
-        >
-          setup
-        </Button>
-        <Spacer width={30} />
-        <Button disabled={status === "started"} onClick={start} fill="primary">
-          start
-        </Button>
+        {status !== "started" && (
+          <>
+            <Button
+              variant="outline"
+              onClick={() => setSetupModal(true)}
+            >
+              setup
+            </Button>
+            <Spacer width={30} />
+            <Button onClick={start} variant="solid">
+              start
+            </Button>
+          </>
+        )}
+        {status === "started" && 
+          <Button onClick={stopGame} variant="solid">
+              stop
+          </Button>}
       </div>
       {setupModal && (
         <SetupModal

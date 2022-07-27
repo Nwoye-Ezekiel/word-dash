@@ -2,8 +2,7 @@ import React from "react";
 import styles from "./index.module.css";
 
 interface ButtonProps {
-  variant?: 'solid' | 'outline';
-  fill?: string;
+  variant?: "solid" | "outline";
   children: JSX.Element | string;
   disabled?: boolean;
   onClick?: () => void;
@@ -14,13 +13,14 @@ export default function Button({
   disabled,
   onClick,
   children,
-  fill
 }: ButtonProps) {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`${styles["button"]} ${styles[`${variant}`]} ${styles[`${fill}`]}`}
-    >{children}</button>
+      className={`${styles["button"]} ${styles[`${variant}`]}`}
+    >
+      {children}
+    </button>
   );
 }

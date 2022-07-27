@@ -121,7 +121,7 @@ export default function SetupModal({
             editedSec < 0
           }
           onClick={handleAppliedChanges}
-          fill={"primary"}
+          variant="solid"
         >
           Apply Changes
         </Button>
