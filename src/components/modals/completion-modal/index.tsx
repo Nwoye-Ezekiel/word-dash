@@ -36,25 +36,17 @@ export default function CompletionModal({
     <ModalTemplate header="Game Over" close={close} icon={false}>
       <div className={styles["main-container"]}>
         <div className={styles["stats-container"]}>
-          <div className={styles["stat-container"]}>
+          <div
+            className={`${styles["stat-container"]} ${styles["stat-container1"]}`}
+          >
+            {" "}
             <p>WPM</p>
             <h2>{Math.round(totalTyped / (timeElapsed / 60))}</h2>
           </div>
-          <div className={styles["stat-container"]}>
-            <p>Time</p>
-            <h2>{`${min} : ${
-              sec === 0 ? "00" : sec < 10 ? `0${sec}` : sec
-            }`}</h2>
-          </div>
-        </div>
-        <div className={styles["stats-container"]}>
-          <div className={styles["stat-container"]}>
-            <p>Accuracy</p>
-            <h2 className={styles[`${accuracy >= 50 ? "good" : "bad"}`]}>
-              {accuracy}%
-            </h2>
-          </div>
-          <div className={styles["stat-container"]}>
+          <div
+            className={`${styles["stat-container"]} ${styles["stat-container2"]}`}
+          >
+            {" "}
             <p>Total Points</p>
             <h2
               className={
@@ -68,10 +60,24 @@ export default function CompletionModal({
               {correctScore}
             </h2>
           </div>
+          <div
+            className={`${styles["stat-container"]} ${styles["stat-container3"]}`}
+          >
+            <p>Accuracy</p>
+            <h2 className={styles[`${accuracy >= 50 ? "good" : "bad"}`]}>
+              {accuracy}%
+            </h2>{" "}
+          </div>
+          <div
+            className={`${styles["stat-container"]} ${styles["stat-container4"]}`}
+          >
+            <p>Time</p>
+            <h2>{`${min}:${sec === 0 ? "00" : sec < 10 ? `0${sec}` : sec}`}</h2>{" "}
+          </div>
         </div>
         <div className={styles["action-buttons"]}>
           <Button variant="solid" onClick={handleRestart}>
-            Try again
+            Try Again
           </Button>
           <Spacer width={30} />
           <Link href="/">

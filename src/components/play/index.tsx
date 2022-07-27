@@ -198,7 +198,7 @@ export default function Play() {
               className={styles["fetch-quote"]}
               onClick={() => generateNewQuote()}
             >
-              fetch new quote
+              Fetch New Quote
             </p>
           )}
         </div>
@@ -210,6 +210,7 @@ export default function Play() {
           onKeyDown={(e) => handleKeyDown(e)}
           maxLength={displayedWords[displayedWordIndex]?.length + 1}
           disabled={status === "waiting" || status === "finished"}
+          autoComplete="off"
         />
       </div>
       <div className={styles["action-buttons"]}>
@@ -219,17 +220,17 @@ export default function Play() {
               variant="outline"
               onClick={() => setSetupModal(true)}
             >
-              setup
+              Setup
             </Button>
             <Spacer width={30} />
             <Button onClick={start} variant="solid">
-              start
+              Start
             </Button>
           </>
         )}
         {status === "started" && 
           <Button onClick={stopGame} variant="solid">
-              stop
+              Stop
           </Button>}
       </div>
       {setupModal && (

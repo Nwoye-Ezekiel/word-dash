@@ -65,7 +65,7 @@ export default function SetupModal({
               className={styles["mode"]}
               onClick={() => handleEditModeChange()}
             >
-              {editMode ? "select options" : "customize timer"}
+              {editMode ? "Select Options" : "Customize Timer"}
             </p>
           </div>
           <ul className={styles["timer-container"]}>
@@ -82,7 +82,7 @@ export default function SetupModal({
                     }`}
                     onClick={() => setSelectedOption(option)}
                   >
-                    {`${min} : ${sec === 0 ? "00" : sec}`}
+                    {`${min}:${sec === 0 ? "00" : sec}`}
                   </li>
                 );
               })
