@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./index.module.css";
 import ModalTemplate from "..";
 import Button from "../../button";
+import { timeConverter } from "../../../helpers/timeConverter";
 
 interface SetupModalProps {
   customWords: string;
@@ -10,10 +11,6 @@ interface SetupModalProps {
   createQuote: (value: string) => void;
   close: () => void;
 }
-
-const convertTimer = (timer: number) => {
-  return [Math.floor(timer / 60), timer % 60 ? timer % 60 : 0];
-};
 
 export default function SetupModal({
   customWords,
@@ -24,7 +21,7 @@ export default function SetupModal({
 }: SetupModalProps) {
   const options = [30, 60, 120, 180];
   const [customTimer] = useState(!options.includes(timer));
-  const [min, sec] = convertTimer(timer);
+  const [min, sec] = timeConverter(timer);
   const [inputChanges, setInputChanges] = useState(customWords);
   const [selectedOption, setSelectedOption] = useState(customTimer ? 0 : timer);
   const [editMode, setEditMode] = useState(customTimer ? true : false);
@@ -74,7 +71,7 @@ export default function SetupModal({
           <ul className={styles["timer-container"]}>
             {!editMode ? (
               options.map((option, index) => {
-                const [min, sec] = convertTimer(option);
+                const [min, sec] = timeConverter(option);
                 return (
                   <li
                     key={index}

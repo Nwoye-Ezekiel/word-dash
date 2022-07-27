@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useCountdown } from 'usehooks-ts'
 import styles from "./index.module.css";
 import { fetchRandomQuote } from "../../api";
 import SetupModal from "../modals/setup-modal";
@@ -21,7 +22,11 @@ export default function Start() {
   const [completionModal, setCompletionModal] = useState(false)
   const [inputType, setInputType] = useState<'space' | 'backspace' | 'text'>('text')
   const [timer, setTimer] = useState(DEFAULT_TIME)
-  const [countdown, setCountdown] = useState(timer)
+  const [count, { startCountdown, stopCountdown, resetCountdown }] =
+    useCountdown({
+      countStart: timer,
+      intervalMs: 1000,
+    })
   const textInput = useRef<HTMLTextAreaElement>(null)
   
   useEffect(() => {
@@ -31,6 +36,18 @@ export default function Start() {
   useEffect(() => {
     if (status === "started") textInput.current?.focus();
   }, [status]);
+
+  useEffect(() => {
+    resetCountdown();
+  }, [timer]);
+
+  useEffect(() => {
+    if (count === 0) {
+      stopCountdown();
+      setCompletionModal(true);
+      setStatus('finished');
+    }
+  }, [count]);
 
   const generateNewQuote = async () => {
     const quote = await fetchRandomQuote();
@@ -44,7 +61,6 @@ export default function Start() {
 
   const handleTimerChange = (timer: number) => {
     setTimer(timer);
-    setCountdown(timer);
   };
 
   const handleKeyDown = ({ keyCode }: { keyCode: number }) => {
@@ -76,7 +92,17 @@ export default function Start() {
 
   const handleInputChange = (value: string) => {
     setTypedCharacters(value);
-    if (inputType === "space") {
+    if (
+      displayedWordIndex + 1 === displayedWords.length &&
+      value === displayedWords[displayedWordIndex]
+    ) {
+      !error && setCorrectScore((prevScore) => prevScore + 1 );
+      setDisplayedWordIndex(displayedWordIndex + 1);
+      stopCountdown();
+      setCompletionModal(true);
+      setStatus('finished');
+    }
+    else if (inputType === "space") {
       if (typedCharacters !== displayedWords[displayedWordIndex]) {
         setTypedCharacterIndex(typedCharacterIndex + 1);
       } else {
@@ -94,6 +120,8 @@ export default function Start() {
   };
 
   const resetGame = () => {
+    setStatus('waiting');
+    resetCountdown();
     generateNewQuote();
     setDisplayedWordIndex(0);
     setTypedCharacters("");
@@ -104,91 +132,106 @@ export default function Start() {
     setInputType("text");
   };
 
-  function start() {
+  const start = () => {
     if (status !== "started") {
       setStatus("started");
-      let interval = setInterval(() => {
-        setCountdown((prevCount) => {
-          if (prevCount === 0) {
-            clearInterval(interval);
-            setStatus("finished");
-            setCompletionModal(true);
-            return timer;
-          } else {
-            return prevCount - 1;
-          }
-        });
-      }, 1000);
+      startCountdown();
     }
-  }
+  };
  
   return (
     <div className={styles["main-container"]}>
-          <p className={`${styles["countdown"]} ${styles[`${countdown <= 5 ? 'red' : countdown <= 10 ? 'yellow' : ''}`]}`}>{countdown}</p>
-          <div className={styles["displays-container"]}>
-          <div className={styles["output-wrapper"]}>
-            <div className={styles["output-display"]}>
+      <p
+        className={`${styles["countdown"]} ${
+          styles[`${count <= 5 ? "red" : count <= 10 ? "yellow" : ""}`]
+        }`}
+      >
+        {count}
+      </p>
+      <div className={styles["displays-container"]}>
+        <div className={styles["output-wrapper"]}>
+          <div className={styles["output-display"]}>
             <div className={styles["completion-bar-container"]}>
               <div
                 className={styles["bar"]}
                 style={{
-                  width: `${Math.round((displayedWordIndex / displayedWords.length) * 100)}%`,
+                  width: `${Math.round(
+                    (displayedWordIndex / displayedWords.length) * 100
+                  )}%`,
                 }}
-              >
-              </div>
+              ></div>
             </div>
-              {displayedWords?.map((word, wordIndex) => (
-                <span key={wordIndex}>
-                  <span>
-                    {word.split("").map((character, characterIndex) => (
-                      <span
-                        className={`${styles["initial-color"]} ${styles[`${generateStyleClass(wordIndex, characterIndex)}`]}`}
-                        key={characterIndex}
-                      >
-                        {character}
-                      </span>
-                    ))}
-                  </span>
-                  <span> </span>
+            {displayedWords?.map((word, wordIndex) => (
+              <span key={wordIndex}>
+                <span>
+                  {word.split("").map((character, characterIndex) => (
+                    <span
+                      className={`${styles["initial-color"]} ${
+                        styles[
+                          `${generateStyleClass(wordIndex, characterIndex)}`
+                        ]
+                      }`}
+                      key={characterIndex}
+                    >
+                      {character}
+                    </span>
+                  ))}
                 </span>
-              ))}
-            </div>
-           {status !== "started" && <p className={styles["fetch-quote"]} onClick={() => generateNewQuote()}>fetch new quote</p>}
+                <span> </span>
+              </span>
+            ))}
           </div>
-            <textarea
-              ref={textInput}
-              value={typedCharacters}
-              onChange={(e) => handleInputChange(e.target.value)}
-              className={styles["input-display"]}
-              onKeyDown={(e) => handleKeyDown(e)}
-              maxLength={displayedWords[displayedWordIndex]?.length + 1}
-              disabled={status === "waiting" || status === "finished"}
-            />
-          </div>
-          <div className={styles["action-buttons"]}>
-            <Button disabled={status === 'started'} variant="outline" onClick={() => setSetupModal(true)}>setup</Button>
-            <Spacer width={30}/>
-            <Button disabled={status === 'started'} onClick={start} fill="primary">start</Button>
-          </div>
-          {setupModal && (
-            <SetupModal
-              timer={timer}
-              createTimer={handleTimerChange}
-              close={() => setSetupModal(false)}
-              customWords={customWords}
-              createQuote={createQuote}
-            />
-          )}
-          {completionModal && (
-            <CompletionModal
-              timeElapsed={timer - countdown}
-              close={() => setCompletionModal(false)}
-              totalWords={displayedWords.length}
-              totalTyped={displayedWordIndex}
-              correctScore={correctScore}
-              restart={resetGame}
-            />
+          {status !== "started" && (
+            <p
+              className={styles["fetch-quote"]}
+              onClick={() => generateNewQuote()}
+            >
+              fetch new quote
+            </p>
           )}
         </div>
+        <textarea
+          ref={textInput}
+          value={typedCharacters}
+          onChange={(e) => handleInputChange(e.target.value)}
+          className={styles["input-display"]}
+          onKeyDown={(e) => handleKeyDown(e)}
+          maxLength={displayedWords[displayedWordIndex]?.length + 1}
+          disabled={status === "waiting" || status === "finished"}
+        />
+      </div>
+      <div className={styles["action-buttons"]}>
+        <Button
+          disabled={status === "started"}
+          variant="outline"
+          onClick={() => setSetupModal(true)}
+        >
+          setup
+        </Button>
+        <Spacer width={30} />
+        <Button disabled={status === "started"} onClick={start} fill="primary">
+          start
+        </Button>
+      </div>
+      {setupModal && (
+        <SetupModal
+          timer={timer}
+          createTimer={handleTimerChange}
+          close={() => setSetupModal(false)}
+          customWords={customWords}
+          createQuote={createQuote}
+        />
+      )}
+      {completionModal && (
+        <CompletionModal
+          timeElapsed={timer - count}
+          close={() => setCompletionModal(false)}
+          totalWords={displayedWords.length}
+          totalTyped={displayedWordIndex}
+          correctScore={correctScore}
+          restart={resetGame}
+        />
+      )}
+    </div>
   );
 }
