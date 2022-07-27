@@ -11,7 +11,7 @@ export default function Home() {
         <Image src={require("../../assets/images/logo.svg")} alt="logo" />
       </span>
       <div>
-        <Link href="/start">
+        <Link href="/play">
           <Button>Play Game</Button>
         </Link>
       </div>
