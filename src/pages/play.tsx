@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Start from "../components/start";
+import PlayGame from "../components/play";
 
 export default function Play() {
   return (
@@ -8,7 +8,7 @@ export default function Play() {
         <title>Word Dash - Play</title>
       </Head>
       <main>
-        <Start />
+        <PlayGame />
       </main>
     </>
   );

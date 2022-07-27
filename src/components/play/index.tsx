@@ -7,7 +7,7 @@ import CompletionModal from "../modals/completion-modal";
 import Button from "../button";
 import Spacer from "../spacer";
 
-export default function Start() {
+export default function Play() {
   const DEFAULT_TIME = 30
   const [customWords, setCustomWords] = useState("");
   const [displayedWords, setDisplayedWords] = useState(Array<string>);
