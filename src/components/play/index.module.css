@@ -43,6 +43,7 @@
   height: 6px;
   overflow: hidden;
   background-color: var(--white-color-dark);
+  margin-top: 5px;
   margin-bottom: 15px;
 }
 
