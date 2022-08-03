@@ -70,8 +70,6 @@ body {
 .background-image {
   position: fixed;
   object-fit: cover;
-  /* object-position: center;
-  object-position: center; */
   z-index: -1;
   left: 0;
   top: 0;
