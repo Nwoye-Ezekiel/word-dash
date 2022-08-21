@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { useCountdown } from "usehooks-ts";
 import styles from "./index.module.css";
 import { fetchRandomQuote } from "../../apis";
-import SetupModal from "../modals/setup-modal";
-import CompletionModal from "../modals/completion-modal";
+import SetupModal from "../modals/setupModal";
+import CompletionModal from "../modals/completionModal";
 import Button from "../button";
-import Spacer from "../spacer";
 
 export default function Play() {
   const DEFAULT_TIME = 30;
@@ -37,8 +36,7 @@ export default function Play() {
 
   useEffect(() => {
     if (status === "started") textInput.current?.focus();
-    // setTimeout(() => { window.scroll(0,0) }, 500);
-    // window.scrollTo(0, 0);
+    if (status === "finished") textInput.current?.blur();
   }, [status]);
 
   useEffect(() => {
@@ -69,7 +67,6 @@ export default function Play() {
 
   const handleKeyDown = ({ keyCode }: { keyCode: number }) => {
     if (keyCode === 32) setInputType("space");
-    else if (keyCode === 8) setInputType("backspace");
     else setInputType("text");
   };
 
@@ -229,7 +226,6 @@ export default function Play() {
             <Button variant="outline" onClick={() => setSetupModal(true)}>
               Setup
             </Button>
-            <Spacer width={30} />
             <Button onClick={start} variant="solid">
               Start
             </Button>

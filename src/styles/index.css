@@ -1,7 +1,8 @@
 :root {
   --background-color: #28B536;
   --primary-color-darkest: #2F4A2F;
-  --primary-color-dark: #294b0f;
+  --primary-color-darker: #294b0f;
+  --primary-color-dark: #077109;
   --primary-color: #018b01;
   --primary-color-light: #01a501;
   --primary-color-lighter: #00c400;
@@ -12,6 +13,7 @@
   --yellow-color: yellow;
   --error-color: #ff4141;
 }
+
 
 @font-face {
   font-family: nunito-r;

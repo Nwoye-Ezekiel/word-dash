@@ -14,3 +14,13 @@
   width: 90%;
   margin-bottom: 40px;
 }
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.action-buttons button:nth-of-type(1) {
+  margin-bottom: 15px;
+}
+

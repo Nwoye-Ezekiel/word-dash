@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./index.module.css";
 import ModalTemplate from "..";
 import Button from "../../button";
 import Link from "next/link";
-import Spacer from "../../spacer";
 import { timeConverter } from "../../../helpers/timeConverter";
 
 interface CompletionModalProps {
@@ -27,6 +26,7 @@ export default function CompletionModal({
   const accuracy = totalTyped
     ? Math.round((correctScore / totalTyped) * 100)
     : 0;
+  const wpm = Math.round(totalTyped / (timeElapsed / 60));
   const handleRestart = () => {
     restart();
     close();
@@ -39,15 +39,27 @@ export default function CompletionModal({
           <div
             className={`${styles["stat-container"]} ${styles["stat-container1"]}`}
           >
-            {" "}
-            <p>WPM</p>
-            <h2>{Math.round(totalTyped / (timeElapsed / 60))}</h2>
+            <p>Total Words</p>
+            <h2>{totalWords}</h2>
           </div>
           <div
             className={`${styles["stat-container"]} ${styles["stat-container2"]}`}
           >
-            {" "}
-            <p>Total Points</p>
+            <p>Typed Words</p>
+            <h2
+              className={
+                styles[
+                  `${totalTyped >= Math.round(totalWords / 2) ? "good" : "bad"}`
+                ]
+              }
+            >
+              {totalTyped}
+            </h2>
+          </div>
+          <div
+            className={`${styles["stat-container"]} ${styles["stat-container3"]}`}
+          >
+            <p>Correct Words</p>
             <h2
               className={
                 styles[
@@ -61,25 +73,33 @@ export default function CompletionModal({
             </h2>
           </div>
           <div
-            className={`${styles["stat-container"]} ${styles["stat-container3"]}`}
+            className={`${styles["stat-container"]} ${styles["stat-container4"]}`}
+          >
+            <p>Time</p>
+            <h2>{`${min} : ${
+              sec === 0 ? "00" : sec < 10 ? `0${sec}` : sec
+            }`}</h2>{" "}
+          </div>
+          <div
+            className={`${styles["stat-container"]} ${styles["stat-container5"]}`}
+          >
+            {" "}
+            <p>WPM</p>
+            <h2 className={styles[`${wpm >= 40 ? "good" : "bad"}`]}>{wpm}</h2>
+          </div>
+          <div
+            className={`${styles["stat-container"]} ${styles["stat-container6"]}`}
           >
             <p>Accuracy</p>
             <h2 className={styles[`${accuracy >= 50 ? "good" : "bad"}`]}>
               {accuracy}%
             </h2>{" "}
           </div>
-          <div
-            className={`${styles["stat-container"]} ${styles["stat-container4"]}`}
-          >
-            <p>Time</p>
-            <h2>{`${min}:${sec === 0 ? "00" : sec < 10 ? `0${sec}` : sec}`}</h2>{" "}
-          </div>
         </div>
         <div className={styles["action-buttons"]}>
           <Button variant="solid" onClick={handleRestart}>
             Try Again
           </Button>
-          <Spacer width={30} />
           <Link href="/">
             <Button>Go Home</Button>
           </Link>
