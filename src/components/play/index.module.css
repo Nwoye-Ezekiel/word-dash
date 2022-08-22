@@ -104,12 +104,12 @@
 }
 
 .fetching {
-  font-size: 16.5px;
+  font-size: 16px;
   color: var(--primary-color);
 }
 
 .error {
-  font-size: 16.5px;
+  font-size: 16px;
   color: var(--error-color);
 }
 
