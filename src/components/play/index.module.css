@@ -103,6 +103,16 @@
   margin-right: 20px;
 }
 
+.fetching {
+  font-size: 16.5px;
+  color: var(--primary-color);
+}
+
+.error {
+  font-size: 16.5px;
+  color: var(--error-color);
+}
+
 .initial-color {
   color: var(--black-color);
 }
@@ -147,6 +157,15 @@
     height: 150px;
     background-color: var(--black-color);
     color: var(--white-color);
+  }
+
+  .fetching {
+    font-size: 18px;
+    color: var(--primary-color-lighter);
+  }
+
+  .error {
+    font-size: 18px;
   }
 
   .initial-color {

@@ -31,4 +31,14 @@ You can as well view the project which is hosted on [vercel](https://vercel.com/
 
 # Project overwiew
 
-This project is a skill typing game that tests your typing abilities by having you enter produced quotes obtained from an API. Additionally, it contains a number of incredible features that let you customize the game to your liking, such as the ability to choose or make your own timer, create custom quotes, and more. Hope you like it and have fun with it!
+Word dash is an online typing game where players must type various texts
+in the quickest time possible. In order to complete the game, the player
+must rapidly and accurately type in words, or individual letters,
+numbers, or other keys, that appear on the screen. This game serves as
+both a challenge and a way to improve one's typing skills. It
+contains amazing features that let you customize the game to your
+liking, such as the ability to choose or make your own timer, create
+custom texts, and it also provides an anlysis of your typing skills. The
+timer begins counting down immediately the game begins, and if you are
+unable to finish typing before the timer expires, the game ends and you
+lose points. I hope you like it!

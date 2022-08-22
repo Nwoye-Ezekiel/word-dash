@@ -15,12 +15,12 @@ export default function Play() {
   const [status, setStatus] = useState("waiting");
   const [correctScore, setCorrectScore] = useState(0);
   const [incorrectScore, setIncorrectScore] = useState(0);
-  const [error, setError] = useState(false);
+  const [wordError, setWordError] = useState(false);
+  const [fetchError, setFetchError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [setupModal, setSetupModal] = useState(false);
   const [completionModal, setCompletionModal] = useState(false);
-  const [inputType, setInputType] = useState<"space" | "backspace" | "text">(
-    "text"
-  );
+  const [inputType, setInputType] = useState<"space" | "text">("text");
   const [timer, setTimer] = useState(DEFAULT_TIME);
   const [count, { startCountdown, stopCountdown, resetCountdown }] =
     useCountdown({
@@ -52,13 +52,25 @@ export default function Play() {
   }, [count]);
 
   const generateNewQuote = async () => {
-    const quote = await fetchRandomQuote();
-    createQuote(quote);
+    try {
+      setLoading(true);
+      const quote = await fetchRandomQuote();
+      createQuote(quote);
+      fetchError && setFetchError(false);
+    } catch (e) {
+      setFetchError(true);
+      setDisplayedWords([]);
+      setCustomWords("");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const createQuote = (words: string) => {
+    words = words.trim();
     setCustomWords(words);
     setDisplayedWords(words?.split(" "));
+    setFetchError(false);
   };
 
   const handleTimerChange = (timer: number) => {
@@ -81,8 +93,8 @@ export default function Play() {
         ) {
           return "correct";
         } else {
-          if (!error) {
-            setError(true);
+          if (!wordError) {
+            setWordError(true);
             setIncorrectScore(incorrectScore + 1);
           }
           return "incorrect";
@@ -108,7 +120,7 @@ export default function Play() {
       displayedWordIndex + 1 === displayedWords.length &&
       value === displayedWords[displayedWordIndex]
     ) {
-      !error && setCorrectScore((prevScore) => prevScore + 1);
+      !wordError && setCorrectScore((prevScore) => prevScore + 1);
       setDisplayedWordIndex(displayedWordIndex + 1);
       stopCountdown();
       setCompletionModal(true);
@@ -117,10 +129,10 @@ export default function Play() {
       inputType === "space" &&
       typedCharacters === displayedWords[displayedWordIndex]
     ) {
-      !error && setCorrectScore(correctScore + 1);
+      !wordError && setCorrectScore(correctScore + 1);
       setTypedCharacters("");
       setDisplayedWordIndex(displayedWordIndex + 1);
-      setError(false);
+      setWordError(false);
     }
   };
 
@@ -130,7 +142,7 @@ export default function Play() {
     generateNewQuote();
     setDisplayedWordIndex(0);
     setTypedCharacters("");
-    setError(false);
+    setWordError(false);
     setCorrectScore(0);
     setIncorrectScore(0);
     setInputType("text");
@@ -148,7 +160,7 @@ export default function Play() {
     resetCountdown();
     setDisplayedWordIndex(0);
     setTypedCharacters("");
-    setError(false);
+    setWordError(false);
     setCorrectScore(0);
     setIncorrectScore(0);
     setInputType("text");
@@ -176,25 +188,33 @@ export default function Play() {
                 }}
               ></div>
             </div>
-            {displayedWords?.map((word, wordIndex) => (
-              <span key={wordIndex}>
-                <span>
-                  {word.split("").map((character, characterIndex) => (
-                    <span
-                      className={`${styles["initial-color"]} ${
-                        styles[
-                          `${generateStyleClass(wordIndex, characterIndex)}`
-                        ]
-                      }`}
-                      key={characterIndex}
-                    >
-                      {character}
-                    </span>
-                  ))}
-                </span>
-                <span> </span>
+            {loading ? (
+              <span className={`${styles["fetching"]}`}>Fetching Quote...</span>
+            ) : displayedWords.length === 0 && fetchError ? (
+              <span className={`${styles["error"]}`}>
+                An error occurred while fetching quote. Try again.
               </span>
-            ))}
+            ) : (
+              displayedWords?.map((word, wordIndex) => (
+                <span key={wordIndex}>
+                  <span>
+                    {word.split("").map((character, characterIndex) => (
+                      <span
+                        className={`${styles["initial-color"]} ${
+                          styles[
+                            `${generateStyleClass(wordIndex, characterIndex)}`
+                          ]
+                        }`}
+                        key={characterIndex}
+                      >
+                        {character}
+                      </span>
+                    ))}
+                  </span>
+                  <span> </span>
+                </span>
+              ))
+            )}
           </div>
           {status !== "started" && (
             <p
@@ -226,7 +246,11 @@ export default function Play() {
             <Button variant="outline" onClick={() => setSetupModal(true)}>
               Setup
             </Button>
-            <Button onClick={start} variant="solid">
+            <Button
+              disabled={loading || fetchError}
+              onClick={start}
+              variant="solid"
+            >
               Start
             </Button>
           </>

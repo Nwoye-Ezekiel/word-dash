@@ -82,7 +82,7 @@ export default function SetupModal({
                     }`}
                     onClick={() => setSelectedOption(option)}
                   >
-                    {`${min}:${sec === 0 ? "00" : sec}`}
+                    {`${min} : ${sec === 0 ? "00" : sec}`}
                   </li>
                 );
               })
@@ -118,7 +118,8 @@ export default function SetupModal({
               inputChanges === customWords) ||
             (editedMin === 0 && editedSec === 0 && selectedOption === 0) ||
             editedMin < 0 ||
-            editedSec < 0
+            editedSec < 0 ||
+            inputChanges.trim().length === 0
           }
           onClick={handleAppliedChanges}
           variant="solid"

@@ -26,7 +26,9 @@ export default function CompletionModal({
   const accuracy = totalTyped
     ? Math.round((correctScore / totalTyped) * 100)
     : 0;
-  const wpm = Math.round(totalTyped / (timeElapsed / 60));
+  const wpm = Math.round(
+    totalTyped / ((timeElapsed === 0 ? 1 : timeElapsed) / 60)
+  );
   const handleRestart = () => {
     restart();
     close();
