@@ -39,7 +39,7 @@ both a challenge and a way to improve one's typing skills. It
 contains amazing features that let you customize the game to your
 liking, such as the ability to choose or make your own timer, create
 custom texts, and it also provides an analysis of your typing skills,
-including your words per minute (WPM). The timer begins counting down
+which includes your words per minute (WPM) and accuracy. The timer begins counting down
 immediately the game begins, and if you are unable to finish typing
 before the timer expires, the game ends and you lose points.
 I hope you like it!
