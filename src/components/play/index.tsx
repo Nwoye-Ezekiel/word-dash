@@ -5,13 +5,15 @@ import { fetchRandomQuote } from "../../apis";
 import SetupModal from "../modals/setupModal";
 import CompletionModal from "../modals/completionModal";
 import Button from "../button";
+import { wordFormatter } from "../../helpers/wordFormatter";
 
 export default function Play() {
   const DEFAULT_TIME = 30;
   const [customWords, setCustomWords] = useState("");
   const [displayedWords, setDisplayedWords] = useState(Array<string>);
   const [displayedWordIndex, setDisplayedWordIndex] = useState(0);
-  const [typedCharacters, setTypedCharacters] = useState("");
+  const [typedWords, setTypedWords] = useState("");
+  const [typedWord, setTypedWord] = useState("");
   const [status, setStatus] = useState("waiting");
   const [correctScore, setCorrectScore] = useState(0);
   const [incorrectScore, setIncorrectScore] = useState(0);
@@ -78,9 +80,17 @@ export default function Play() {
     setTimer(timer);
   };
 
-  const handleKeyDown = ({ keyCode }: { keyCode: number }) => {
-    if (keyCode === 32) setInputType("space");
-    else setInputType("text");
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.code === "Backspace" || e.code === "Delete") {
+      if (typedWord.length === 0) {
+        e.preventDefault();
+      }
+    }
+
+    if (e.code === "Space") {
+      console.log("space");
+      setInputType("space");
+    } else setInputType("text");
   };
 
   function generateStyleClass(wordIndex: number, characterIndex: number) {
@@ -91,11 +101,11 @@ export default function Play() {
         return "correct";
       }
     } else if (wordIndex === displayedWordIndex) {
-      if (characterIndex < typedCharacters.length) {
+      if (characterIndex < typedWord.length) {
         if (
           displayedWords[displayedWordIndex][characterIndex] ===
-            typedCharacters[characterIndex] &&
-          !(typedCharacters.length > displayedWords[displayedWordIndex].length)
+            typedWord[characterIndex] &&
+          !(typedWord.length > displayedWords[displayedWordIndex].length)
         ) {
           return "correct";
         } else {
@@ -104,48 +114,41 @@ export default function Play() {
             setWordErrorIndexes([...wordErrorIndexes, displayedWordIndex]);
             setIncorrectScore(incorrectScore + 1);
           }
-          if (
-            typedCharacters.length > displayedWords[displayedWordIndex].length
-          )
+          if (typedWord.length > displayedWords[displayedWordIndex].length)
             return "alert";
           else return "incorrect";
         }
-      } else if (characterIndex === typedCharacters.length) {
+      } else if (characterIndex === typedWord.length) {
         return "underline";
       } else return "";
     } else return "";
   }
 
   const handleInputChange = (value: string) => {
-    value = value
-      .replace("”", '"')
-      .replace("“", '"')
-      .replace("’", "'")
-      .replace("‘", "'")
-      .replace(/[\u2018\u2019]/g, "'")
-      .replace(/[\u201C\u201D]/g, '"')
-      .replace(/[\u2013\u2014]/g, "-")
-      .replace(/[\u2026]/g, "...");
+    value = wordFormatter(value);
+    const typedWord = value.split(" ").slice(displayedWordIndex).join(" ");
 
-    setTypedCharacters(value);
-
-    if (
-      displayedWordIndex + 1 === displayedWords.length &&
-      value === displayedWords[displayedWordIndex]
-    ) {
-      !wordError && setCorrectScore((prevScore) => prevScore + 1);
-      setDisplayedWordIndex(displayedWordIndex + 1);
-      stopCountdown();
-      setCompletionModal(true);
-      setStatus("finished");
-    } else if (
-      inputType === "space" &&
-      typedCharacters === displayedWords[displayedWordIndex]
-    ) {
-      !wordError && setCorrectScore(correctScore + 1);
-      setTypedCharacters("");
-      setDisplayedWordIndex(displayedWordIndex + 1);
-      setWordError(false);
+    if (typedWord.length <= displayedWords[displayedWordIndex].length + 1) {
+      setTypedWords(value);
+      setTypedWord(typedWord);
+      if (
+        displayedWordIndex + 1 === displayedWords.length &&
+        typedWord === displayedWords[displayedWordIndex]
+      ) {
+        !wordError && setCorrectScore((prevScore) => prevScore + 1);
+        setDisplayedWordIndex(displayedWordIndex + 1);
+        stopCountdown();
+        setCompletionModal(true);
+        setStatus("finished");
+      } else if (
+        inputType === "space" &&
+        typedWord.trim() === displayedWords[displayedWordIndex]
+      ) {
+        !wordError && setCorrectScore(correctScore + 1);
+        setTypedWord("");
+        setDisplayedWordIndex(displayedWordIndex + 1);
+        setWordError(false);
+      }
     }
   };
 
@@ -154,7 +157,8 @@ export default function Play() {
     resetCountdown();
     generateNewQuote();
     setDisplayedWordIndex(0);
-    setTypedCharacters("");
+    setTypedWord("");
+    setTypedWords("");
     setCorrectScore(0);
     setIncorrectScore(0);
     setInputType("text");
@@ -173,7 +177,8 @@ export default function Play() {
     setStatus("stopped");
     resetCountdown();
     setDisplayedWordIndex(0);
-    setTypedCharacters("");
+    setTypedWord("");
+    setTypedWords("");
     setCorrectScore(0);
     setIncorrectScore(0);
     setInputType("text");
@@ -242,11 +247,13 @@ export default function Play() {
         </div>
         <textarea
           ref={textInput}
-          value={typedCharacters}
+          value={typedWords}
           onChange={(e) => handleInputChange(e.target.value)}
           className={styles["input-display"]}
-          onKeyDown={(e) => handleKeyDown(e)}
-          maxLength={displayedWords[displayedWordIndex]?.length + 1}
+          onKeyDown={(e) => {
+            handleKeyDown(e);
+          }}
+          // maxLength={displayedWords[displayedWordIndex]?.length + 1}
           disabled={
             status === "waiting" ||
             status === "finished" ||

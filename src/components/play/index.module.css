@@ -92,7 +92,7 @@
   outline: 0;
   width: 100%;
   resize: none;
-  height: 60px;
+  min-height: 60px;
   font-size: 18px;
   border-radius: 0;
   font-family: "Segoe UI";
@@ -170,7 +170,7 @@
 
   .input-display {
     font-size: 20px;
-    height: 100px;
+    min-height: 100px;
     border-radius: 5px;
   }
 
