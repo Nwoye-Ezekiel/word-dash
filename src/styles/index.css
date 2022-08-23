@@ -1,6 +1,6 @@
 :root {
-  --background-color: #28B536;
-  --primary-color-darkest: #2F4A2F;
+  --background-color: #28b536;
+  --primary-color-darkest: #2f4a2f;
   --primary-color-darker: #294b0f;
   --primary-color-dark: #077109;
   --primary-color: #018b01;
@@ -15,14 +15,13 @@
   --error-color-light: #ff4747;
 }
 
-
 @font-face {
-  font-family: nunito-r;
+  font-family: "nunito-r";
   src: url("./fonts/Nunito-Regular.ttf");
 }
 
 @font-face {
-  font-family: nunito-b;
+  font-family: "nunito-b";
   src: url("./fonts/Nunito-SemiBold.ttf");
 }
 
@@ -36,7 +35,7 @@
   padding: 0;
   margin: 0;
   color: var(--black-color);
-  font-family: nunito-r;
+  font-family: "nunito-r";
   font-weight: 400;
 }
 

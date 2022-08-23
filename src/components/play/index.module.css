@@ -18,7 +18,7 @@
 .countdown {
   font-size: 40px;
   margin-bottom: 5px;
-  font-family: River;
+  font-family: "River";
   margin-top: -50px;
   color: var(--white-color);
 }
@@ -63,6 +63,7 @@
   width: 100%;
   min-height: 150px;
   font-size: 18px;
+  line-height: 1.6;
   position: relative;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -94,8 +95,9 @@
   resize: none;
   min-height: 60px;
   font-size: 18px;
+  line-height: 1.6;
   border-radius: 0;
-  font-family: "Segoe UI";
+  font-family: "nunito-r";
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding: 15px 20px;
@@ -128,7 +130,7 @@
 }
 
 .initial-color {
-  font-family: "Segoe UI";
+  font-family: "nunito-r";
   color: var(--white-color);
 }
 

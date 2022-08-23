@@ -14,7 +14,7 @@ export default function AboutGameModal({ close }: { close: () => void }) {
         contains amazing features that let you customize the game to your
         liking, such as the ability to choose or make your own timer, create
         custom texts, and it also provides an analysis of your typing skills,
-        including your Words Per Minute(WPM). The timer begins counting down
+        including your words per minute (WPM). The timer begins counting down
         immediately the game begins, and if you are unable to finish typing
         before the timer expires, the game ends and you lose points.
       </p>
