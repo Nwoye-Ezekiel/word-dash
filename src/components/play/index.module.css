@@ -19,6 +19,7 @@
   font-size: 40px;
   margin-bottom: 5px;
   font-family: River;
+  margin-top: -50px;
   color: var(--white-color);
 }
 
@@ -66,7 +67,7 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   padding: 15px 20px 40px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   color: var(--white-color);
   background-color: var(--black-color);
@@ -92,12 +93,17 @@
   resize: none;
   height: 60px;
   font-size: 18px;
+  border-radius: 0;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding: 15px 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   background-color: var(--black-color);
   color: var(--white-color);
+}
+
+.input-display:disabled {
+  opacity: 1;
 }
 
 .action-buttons {
@@ -111,7 +117,7 @@
 
 .fetching {
   font-size: 16px;
-  color: var(--primary-color);
+  color: var(--primary-color-lighter);
 }
 
 .error {
@@ -145,11 +151,11 @@
     width: 58%;
     padding: 17px;
     border-radius: 10px;
+    background: var(--primary-color-light);
   }
 
   .countdown {
     font-size: 45px;
-    margin-top: -50px;
   }
 
   .output-display {
@@ -166,7 +172,6 @@
 
   .fetching {
     font-size: 18px;
-    color: var(--primary-color-lighter);
   }
 
   .error {

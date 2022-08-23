@@ -29,7 +29,7 @@ export default function Play() {
       intervalMs: 1000,
     });
 
-  const textInput = useRef<HTMLTextAreaElement>(null);
+  const textInput = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     generateNewQuote();
@@ -240,7 +240,7 @@ export default function Play() {
             </p>
           )}
         </div>
-        <textarea
+        <input
           ref={textInput}
           value={typedCharacters}
           onChange={(e) => handleInputChange(e.target.value)}
