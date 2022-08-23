@@ -16,6 +16,7 @@ export default function Play() {
   const [correctScore, setCorrectScore] = useState(0);
   const [incorrectScore, setIncorrectScore] = useState(0);
   const [wordError, setWordError] = useState(false);
+  const [wordErrorIndexes, setWordErrorIndexes] = useState(Array<number>);
   const [fetchError, setFetchError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [setupModal, setSetupModal] = useState(false);
@@ -83,8 +84,13 @@ export default function Play() {
   };
 
   function generateStyleClass(wordIndex: number, characterIndex: number) {
-    if (wordIndex < displayedWordIndex) return "correct";
-    else if (wordIndex === displayedWordIndex) {
+    if (wordIndex < displayedWordIndex) {
+      if (wordErrorIndexes.includes(wordIndex)) {
+        return "incorrect";
+      } else {
+        return "correct";
+      }
+    } else if (wordIndex === displayedWordIndex) {
       if (characterIndex < typedCharacters.length) {
         if (
           displayedWords[displayedWordIndex][characterIndex] ===
@@ -95,9 +101,14 @@ export default function Play() {
         } else {
           if (!wordError) {
             setWordError(true);
+            setWordErrorIndexes([...wordErrorIndexes, displayedWordIndex]);
             setIncorrectScore(incorrectScore + 1);
           }
-          return "incorrect";
+          if (
+            typedCharacters.length > displayedWords[displayedWordIndex].length
+          )
+            return "warning";
+          else return "incorrect";
         }
       } else return "";
     } else return "";
@@ -142,10 +153,11 @@ export default function Play() {
     generateNewQuote();
     setDisplayedWordIndex(0);
     setTypedCharacters("");
-    setWordError(false);
     setCorrectScore(0);
     setIncorrectScore(0);
     setInputType("text");
+    setWordError(false);
+    setWordErrorIndexes([]);
   };
 
   const start = () => {
@@ -160,17 +172,18 @@ export default function Play() {
     resetCountdown();
     setDisplayedWordIndex(0);
     setTypedCharacters("");
-    setWordError(false);
     setCorrectScore(0);
     setIncorrectScore(0);
     setInputType("text");
+    setWordError(false);
+    setWordErrorIndexes([]);
   };
 
   return (
     <div className={styles["main-container"]}>
       <p
         className={`${styles["countdown"]} ${
-          styles[`${count <= 5 ? "red" : count <= 10 ? "yellow" : ""}`]
+          styles[`${count <= 5 ? "danger" : count <= 10 ? "warning" : ""}`]
         }`}
       >
         {count}

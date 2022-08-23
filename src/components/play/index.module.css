@@ -18,22 +18,20 @@
 .countdown {
   font-size: 40px;
   margin-bottom: 5px;
-  font-family: nunito-b;
+  font-family: River;
   color: var(--white-color);
 }
 
-.red {
+.danger {
   color: var(--error-color);
-}
-
-.yellow {
-  color: var(--yellow-color);
 }
 
 .displays-container {
   width: 90%;
   margin: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
+  background: var(--primary-color-light);
+  color: var(--white-color);
 }
 
 .completion-bar-container {
@@ -42,14 +40,14 @@
   border-radius: 5px;
   height: 6px;
   overflow: hidden;
-  background-color: var(--white-color-dark);
+  background-color: var(--primary-color-darkest);
   margin-top: 5px;
   margin-bottom: 15px;
 }
 
 .bar {
   border-radius: 5px;
-  background-color: var(--primary-color-light);
+  background-color: var(--primary-color-lighter);
 }
 
 .output-wrapper {
@@ -61,11 +59,13 @@
   min-height: 150px;
   font-size: 18px;
   position: relative;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   padding: 15px 20px 40px;
   margin-bottom: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  background-color: var(--white-color-darker);
+  color: var(--white-color);
+  background-color: var(--black-color);
 }
 
 .fetch-quote {
@@ -88,10 +88,12 @@
   resize: none;
   height: 60px;
   font-size: 18px;
-  border-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   padding: 15px 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  background-color: var(--white-color-darker);
+  background-color: var(--black-color);
+  color: var(--white-color);
 }
 
 .action-buttons {
@@ -114,7 +116,7 @@
 }
 
 .initial-color {
-  color: var(--black-color);
+  color: var(--white-color);
 }
 
 .correct {
@@ -125,38 +127,32 @@
   color: var(--error-color);
 }
 
+.warning {
+  color: var(--yellow-color);
+}
+
 @media screen and (min-width: 768px) {
   .displays-container {
-    width: 60%;
-    padding: 20px;
-    background: var(--primary-color-light);
-    color: var(--white-color);
+    width: 58%;
+    padding: 17px;
+    border-radius: 10px;
   }
-
+  
   .countdown {
-    font-size: 40px;
-  }
-
-  .completion-bar-container {
-    background-color: var(--primary-color-darkest);
-  }
-
-  .bar {
-    background-color: var(--primary-color-lighter);
+    font-size: 45px;
+    margin-top: -50px;
   }
 
   .output-display {
     font-size: 20px;
-    margin-bottom: 20px;
-    color: var(--white-color);
-    background-color: var(--black-color);
+    margin-bottom: 17px;
+    border-radius: 5px;
   }
 
   .input-display {
     font-size: 20px;
-    height: 150px;
-    background-color: var(--black-color);
-    color: var(--white-color);
+    height: 100px;
+    border-radius: 5px;
   }
 
   .fetching {
@@ -168,15 +164,15 @@
     font-size: 18px;
   }
 
-  .initial-color {
-    color: var(--white-color);
-  }
-
   .correct {
     color: var(--primary-color-lighter);
   }
 
   .incorrect {
     color: var(--error-color);
+  }
+
+  .warning {
+    color: var(--yellow-color);
   }
 }
