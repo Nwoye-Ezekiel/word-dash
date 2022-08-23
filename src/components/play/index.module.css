@@ -33,7 +33,7 @@
 
 .displays-container {
   width: 90%;
-  margin: 20px;
+  margin: 20px 20px 60px;
   border-radius: 5px;
   background: var(--primary-color-light);
   color: var(--white-color);
@@ -152,6 +152,7 @@
     padding: 17px;
     border-radius: 10px;
     background: var(--primary-color-light);
+    margin-bottom: 20px;
   }
 
   .countdown {
