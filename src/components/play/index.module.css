@@ -87,6 +87,7 @@
 }
 
 .input-display {
+  display: block;
   border: 0;
   outline: 0;
   width: 100%;
@@ -94,6 +95,7 @@
   height: 60px;
   font-size: 18px;
   border-radius: 0;
+  font-family: "Segoe UI";
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding: 15px 20px;
@@ -126,6 +128,7 @@
 }
 
 .initial-color {
+  font-family: "Segoe UI";
   color: var(--white-color);
 }
 
@@ -139,11 +142,11 @@
 
 .alert {
   color: var(--error-color);
-  text-decoration: underline;
+  border-bottom: 1px solid var(--error-color);
 }
 
 .underline {
-  text-decoration: underline;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 @media screen and (min-width: 768px) {
