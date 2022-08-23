@@ -41,13 +41,42 @@ export default function CompletionModal({
           <div
             className={`${styles["stat-container"]} ${styles["stat-container1"]}`}
           >
-            <p>Total Words</p>
-            <h2>{totalWords}</h2>
+            <p>Time Taken</p>
+            <h2>{`${min} : ${
+              sec === 0 ? "00" : sec < 10 ? `0${sec}` : sec
+            }`}</h2>{" "}
           </div>
           <div
             className={`${styles["stat-container"]} ${styles["stat-container2"]}`}
           >
-            <p>Typed Words</p>
+            <p>Total Words</p>
+            <h2>{totalWords}</h2>
+          </div>
+          <div
+            className={`${styles["stat-container"]} ${styles["stat-container3"]}`}
+          >
+            <p>Accuracy</p>
+            <h2 className={styles[`${accuracy >= 50 ? "good" : "bad"}`]}>
+              {accuracy}%
+            </h2>{" "}
+          </div>
+          <div
+            className={`${styles["stat-container"]} ${styles["stat-container4"]}`}
+          >
+            {" "}
+            <p>WPM</p>
+            <h2 className={styles[`${wpm >= 40 ? "good" : "bad"}`]}>{wpm}</h2>
+          </div>
+          <div
+            className={`${styles["stat-container"]} ${styles["stat-container5"]}`}
+          >
+            <p>Incorrect Words</p>
+            <h2>{totalTyped - correctScore}</h2>
+          </div>
+          <div
+            className={`${styles["stat-container"]} ${styles["stat-container6"]}`}
+          >
+            <p>Correct Words</p>
             <h2
               className={
                 styles[
@@ -55,47 +84,8 @@ export default function CompletionModal({
                 ]
               }
             >
-              {totalTyped}
-            </h2>
-          </div>
-          <div
-            className={`${styles["stat-container"]} ${styles["stat-container3"]}`}
-          >
-            <p>Correct Words</p>
-            <h2
-              className={
-                styles[
-                  `${
-                    correctScore >= Math.round(totalWords / 2) ? "good" : "bad"
-                  }`
-                ]
-              }
-            >
               {correctScore}
             </h2>
-          </div>
-          <div
-            className={`${styles["stat-container"]} ${styles["stat-container4"]}`}
-          >
-            <p>Time</p>
-            <h2>{`${min} : ${
-              sec === 0 ? "00" : sec < 10 ? `0${sec}` : sec
-            }`}</h2>{" "}
-          </div>
-          <div
-            className={`${styles["stat-container"]} ${styles["stat-container5"]}`}
-          >
-            {" "}
-            <p>WPM</p>
-            <h2 className={styles[`${wpm >= 40 ? "good" : "bad"}`]}>{wpm}</h2>
-          </div>
-          <div
-            className={`${styles["stat-container"]} ${styles["stat-container6"]}`}
-          >
-            <p>Accuracy</p>
-            <h2 className={styles[`${accuracy >= 50 ? "good" : "bad"}`]}>
-              {accuracy}%
-            </h2>{" "}
           </div>
         </div>
         <div className={styles["action-buttons"]}>

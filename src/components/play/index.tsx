@@ -16,7 +16,6 @@ export default function Play() {
   const [typedWord, setTypedWord] = useState("");
   const [status, setStatus] = useState("waiting");
   const [correctScore, setCorrectScore] = useState(0);
-  const [incorrectScore, setIncorrectScore] = useState(0);
   const [wordError, setWordError] = useState(false);
   const [wordErrorIndexes, setWordErrorIndexes] = useState(Array<number>);
   const [fetchError, setFetchError] = useState(false);
@@ -112,7 +111,6 @@ export default function Play() {
           if (!wordError) {
             setWordError(true);
             setWordErrorIndexes([...wordErrorIndexes, displayedWordIndex]);
-            setIncorrectScore(incorrectScore + 1);
           }
           if (typedWord.length > displayedWords[displayedWordIndex].length)
             return "alert";
@@ -160,7 +158,6 @@ export default function Play() {
     setTypedWord("");
     setTypedWords("");
     setCorrectScore(0);
-    setIncorrectScore(0);
     setInputType("text");
     setWordError(false);
     setWordErrorIndexes([]);
@@ -180,7 +177,6 @@ export default function Play() {
     setTypedWord("");
     setTypedWords("");
     setCorrectScore(0);
-    setIncorrectScore(0);
     setInputType("text");
     setWordError(false);
     setWordErrorIndexes([]);

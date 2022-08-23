@@ -24,7 +24,7 @@
 }
 
 .danger {
-  color: var(--error-color);
+  color: var(--error-color-light);
 }
 
 .warning {
@@ -137,12 +137,12 @@
 }
 
 .incorrect {
-  color: var(--error-color);
+  color: var(--error-color-light);
 }
 
 .alert {
-  color: var(--error-color);
-  border-bottom: 1px solid var(--error-color);
+  color: var(--error-color-light);
+  border-bottom: 1px solid var(--error-color-light);
 }
 
 .underline {
