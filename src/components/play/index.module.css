@@ -26,6 +26,10 @@
   color: var(--error-color);
 }
 
+.warning {
+  color: var(--yellow-color);
+}
+
 .displays-container {
   width: 90%;
   margin: 20px;
@@ -120,15 +124,20 @@
 }
 
 .correct {
-  color: var(--primary-color-light);
+  color: var(--primary-color-lighter);
 }
 
 .incorrect {
   color: var(--error-color);
 }
 
-.warning {
-  color: var(--yellow-color);
+.alert {
+  color: var(--error-color);
+  text-decoration: underline;
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 @media screen and (min-width: 768px) {
@@ -137,7 +146,7 @@
     padding: 17px;
     border-radius: 10px;
   }
-  
+
   .countdown {
     font-size: 45px;
     margin-top: -50px;
@@ -162,17 +171,5 @@
 
   .error {
     font-size: 18px;
-  }
-
-  .correct {
-    color: var(--primary-color-lighter);
-  }
-
-  .incorrect {
-    color: var(--error-color);
-  }
-
-  .warning {
-    color: var(--yellow-color);
   }
 }

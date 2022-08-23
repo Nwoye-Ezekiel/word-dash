@@ -107,9 +107,11 @@ export default function Play() {
           if (
             typedCharacters.length > displayedWords[displayedWordIndex].length
           )
-            return "warning";
+            return "alert";
           else return "incorrect";
         }
+      } else if (characterIndex === typedCharacters.length) {
+        return "underline";
       } else return "";
     } else return "";
   }
