@@ -4,32 +4,39 @@ import ModalTemplate from "..";
 import Button from "../../button";
 import Link from "next/link";
 import { timeConverter } from "../../../helpers/timeConverter";
+import { count } from "console";
 
 interface CompletionModalProps {
+  timer: number;
+  count: number;
   close: () => void;
   totalWords: number;
   totalTyped: number;
   correctScore: number;
-  timeElapsed: number;
   restart: () => void;
 }
 
 export default function CompletionModal({
   close,
+  timer,
+  count,
   totalWords,
   totalTyped,
   correctScore,
-  timeElapsed,
   restart,
 }: CompletionModalProps) {
+  const timeElapsed = timer - count;
   const [min, sec] = timeConverter(timeElapsed);
   const points = Math.round((correctScore / totalWords) * 50);
   const accuracy = totalTyped
     ? Math.round((correctScore / totalTyped) * 100)
     : 0;
-  const wpm = Math.round(
-    totalTyped / ((timeElapsed === 0 ? 1 : timeElapsed) / 60)
-  );
+  const wpm =
+    timeElapsed === 0 && totalTyped > 0
+      ? 60
+      : timeElapsed === 0 && totalTyped === 0
+      ? 0
+      : Math.round(totalTyped / (timeElapsed / 60));
 
   const handleRestart = () => {
     restart();
@@ -52,7 +59,9 @@ export default function CompletionModal({
             className={`${styles["stat-container"]} ${styles["stat-container2"]}`}
           >
             <p>Typed Words</p>
-            <h2>{totalTyped} / {totalWords}</h2>
+            <h2>
+              {totalTyped} / {totalWords}
+            </h2>
           </div>
           <div
             className={`${styles["stat-container"]} ${styles["stat-container3"]}`}
@@ -79,13 +88,7 @@ export default function CompletionModal({
             className={`${styles["stat-container"]} ${styles["stat-container6"]}`}
           >
             <p>Total Points</p>
-            <h2
-              className={
-                styles[
-                  `${points >= 25 ? "good" : "bad"}`
-                ]
-              }
-            >
+            <h2 className={styles[`${points >= 25 ? "good" : "bad"}`]}>
               {points} / 50
             </h2>
           </div>

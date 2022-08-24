@@ -289,7 +289,8 @@ export default function Play() {
       )}
       {completionModal && (
         <CompletionModal
-          timeElapsed={timer - count}
+          timer={timer}
+          count={count}
           close={() => setCompletionModal(false)}
           totalWords={displayedWords.length}
           totalTyped={displayedWordIndex}
