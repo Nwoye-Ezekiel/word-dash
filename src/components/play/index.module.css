@@ -33,7 +33,7 @@
 
 .displays-container {
   width: 90%;
-  margin: 20px 20px 60px;
+  margin: 20px 20px 40px;
   border-radius: 5px;
   background: var(--primary-color-light);
   color: var(--white-color);
@@ -93,7 +93,7 @@
   outline: 0;
   width: 100%;
   resize: none;
-  min-height: 60px;
+  min-height: 100px;
   font-size: 18px;
   line-height: 1.5;
   border-radius: 0;
@@ -172,7 +172,6 @@
 
   .input-display {
     font-size: 20px;
-    min-height: 100px;
     border-radius: 5px;
   }
 
