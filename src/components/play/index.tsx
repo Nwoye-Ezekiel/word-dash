@@ -69,7 +69,7 @@ export default function Play() {
   };
 
   const createQuote = (words: string) => {
-    words = words.trim();
+    words = wordFormatter(words).trim();
     setCustomWords(words);
     setDisplayedWords(words?.split(" "));
     setFetchError(false);
@@ -249,7 +249,6 @@ export default function Play() {
           onKeyDown={(e) => {
             handleKeyDown(e);
           }}
-          // maxLength={displayedWords[displayedWordIndex]?.length + 1}
           disabled={
             status === "waiting" ||
             status === "finished" ||
