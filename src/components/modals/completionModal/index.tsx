@@ -23,12 +23,14 @@ export default function CompletionModal({
   restart,
 }: CompletionModalProps) {
   const [min, sec] = timeConverter(timeElapsed);
+  const points = Math.round((correctScore / totalWords) * 50);
   const accuracy = totalTyped
     ? Math.round((correctScore / totalTyped) * 100)
     : 0;
   const wpm = Math.round(
     totalTyped / ((timeElapsed === 0 ? 1 : timeElapsed) / 60)
   );
+
   const handleRestart = () => {
     restart();
     close();
@@ -49,8 +51,8 @@ export default function CompletionModal({
           <div
             className={`${styles["stat-container"]} ${styles["stat-container2"]}`}
           >
-            <p>Total Words</p>
-            <h2>{totalWords}</h2>
+            <p>Typed Words</p>
+            <h2>{totalTyped} / {totalWords}</h2>
           </div>
           <div
             className={`${styles["stat-container"]} ${styles["stat-container3"]}`}
@@ -70,21 +72,21 @@ export default function CompletionModal({
           <div
             className={`${styles["stat-container"]} ${styles["stat-container5"]}`}
           >
-            <p>Incorrect Words</p>
+            <p>Word Errors</p>
             <h2>{totalTyped - correctScore}</h2>
           </div>
           <div
             className={`${styles["stat-container"]} ${styles["stat-container6"]}`}
           >
-            <p>Correct Words</p>
+            <p>Total Points</p>
             <h2
               className={
                 styles[
-                  `${totalTyped >= Math.round(totalWords / 2) ? "good" : "bad"}`
+                  `${points >= 25 ? "good" : "bad"}`
                 ]
               }
             >
-              {correctScore}
+              {points} / 50
             </h2>
           </div>
         </div>
