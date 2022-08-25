@@ -1,5 +1,5 @@
 import Head from "next/head";
-import PlayGame from "../components/play";
+import PlayGame from "../components/pages/play";
 
 export default function Play() {
   return (

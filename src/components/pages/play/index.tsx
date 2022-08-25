@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useCountdown } from "usehooks-ts";
 import styles from "./index.module.css";
-import { fetchRandomQuote } from "../../apis";
-import SetupModal from "../modals/setupModal";
-import CompletionModal from "../modals/completionModal";
-import Button from "../button";
-import { wordFormatter } from "../../helpers/wordFormatter";
+import { fetchRandomQuote } from "../../../apis";
+import SetupModal from "../../modals/setupModal";
+import CompletionModal from "../../modals/completionModal";
+import Button from "../../button";
+import { wordFormatter } from "../../../helpers/wordFormatter";
 
 export default function Play() {
   const DEFAULT_TIME = 30;
@@ -268,7 +268,11 @@ export default function Play() {
             </Button>
           </>
         )}
-        {status === "started" && <Button onClick={stopGame} variant="tertiary">Stop</Button>}
+        {status === "started" && (
+          <Button onClick={stopGame} variant="tertiary">
+            Stop
+          </Button>
+        )}
       </div>
       {setupModal && (
         <SetupModal
