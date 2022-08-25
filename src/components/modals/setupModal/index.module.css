@@ -25,6 +25,7 @@
 }
 
 .character-count {
+  font-family: "nunito-b";
   position: absolute;
   display: flex;
   justify-content: center;
@@ -34,8 +35,8 @@
   bottom: 20px;
   right: 10px;
   padding: 2px 10px;
-  background-color: var(--error-color);
-  color: var(--white-color);
+  background-color: var(--white-color);
+  color: var(--red-color);
   text-align: center;
   border-radius: 50%;
   font-size: 13px;
@@ -54,11 +55,13 @@
 }
 
 .mode {
+  font-family: "nunito-b";
   cursor: pointer;
   font-size: 13px;
   margin-bottom: 8px;
   padding: 2px 10px;
-  background-color: var(--primary-color);
+  border: 1px solid var(--red-color);
+  background-color: var(--red-color);
   color: var(--white-color);
   border-radius: 5px;
   font-size: 13px;
@@ -96,8 +99,9 @@
 }
 
 .selected-option {
-  background-color: var(--primary-color);
-  color: var(--white-color);
+  font-family: "nunito-b";
+  background-color: var(--white-color);
+  color: var(--red-color);
 }
 
 .edit-container {

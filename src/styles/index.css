@@ -10,19 +10,20 @@
   --white-color-dark: #ededed;
   --white-color: #f6f6f6;
   --black-color: #000000cc;
+  --transparent-color: #00000080;
   --yellow-color: yellow;
-  --error-color: #ff4141;
-  --error-color-light: #ff4747;
+  --red-color: #ff4141;
+  --red-color-light: #ff4747;
 }
 
 @font-face {
   font-family: "nunito-r";
-  src: url("./fonts/Nunito-Regular.ttf");
+  src: url("./fonts/Nunito-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "nunito-b";
-  src: url("./fonts/Nunito-SemiBold.ttf");
+  src: url("./fonts/Nunito-SemiBold.ttf") format("truetype");
 }
 
 @font-face {

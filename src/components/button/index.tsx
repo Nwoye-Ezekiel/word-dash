@@ -2,14 +2,14 @@ import React from "react";
 import styles from "./index.module.css";
 
 interface ButtonProps {
-  variant?: "solid" | "outline";
+  variant?: "primary" | "secondary" | "tertiary" | "outline";
   children: JSX.Element | string;
   disabled?: boolean;
   onClick?: () => void;
 }
 
 export default function Button({
-  variant = "solid",
+  variant = "primary",
   disabled,
   onClick,
   children,

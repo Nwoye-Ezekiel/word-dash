@@ -60,7 +60,7 @@ export default function SetupModal({
         </div>
         <div className={styles["timer-wrapper"]}>
           <div className={styles["timer-header"]}>
-            <p className={styles["label"]}>Timer (min : sec)</p>
+            <p className={styles["label"]}>Timer(min : sec)</p>
             <p
               className={styles["mode"]}
               onClick={() => handleEditModeChange()}
@@ -122,7 +122,7 @@ export default function SetupModal({
             inputChanges.trim().length === 0
           }
           onClick={handleAppliedChanges}
-          variant="solid"
+          variant="secondary"
         >
           Apply Changes
         </Button>

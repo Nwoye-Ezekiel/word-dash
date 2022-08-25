@@ -94,9 +94,7 @@ export default function CompletionModal({
           </div>
         </div>
         <div className={styles["action-buttons"]}>
-          <Button variant="solid" onClick={handleRestart}>
-            Try Again
-          </Button>
+          <Button onClick={handleRestart}>Try Again</Button>
           <Link href="/">
             <Button>Go Home</Button>
           </Link>

@@ -24,7 +24,7 @@
 }
 
 .danger {
-  color: var(--error-color-light);
+  color: var(--red-color-light);
 }
 
 .warning {
@@ -35,7 +35,7 @@
   width: 90%;
   margin: 20px 20px 40px;
   border-radius: 5px;
-  background: var(--primary-color-light);
+  background: var(--primary-color-darkest);
   color: var(--white-color);
 }
 
@@ -126,7 +126,7 @@
 
 .error {
   font-size: 16px;
-  color: var(--error-color);
+  color: var(--red-color);
 }
 
 .initial-color {
@@ -139,12 +139,12 @@
 }
 
 .incorrect {
-  color: var(--error-color-light);
+  color: var(--red-color-light);
 }
 
 .alert {
-  color: var(--error-color-light);
-  border-bottom: 1px solid var(--error-color-light);
+  color: var(--red-color-light);
+  border-bottom: 1px solid var(--red-color-light);
 }
 
 .underline {
@@ -156,7 +156,7 @@
     width: 58%;
     padding: 17px;
     border-radius: 10px;
-    background: var(--primary-color-light);
+    background: var(--primary-color-darkest);
     margin-bottom: 20px;
   }
 

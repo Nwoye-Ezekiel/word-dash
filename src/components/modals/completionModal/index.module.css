@@ -72,5 +72,5 @@
 }
 
 .bad {
-  color: var(--error-color);
+  color: var(--red-color);
 }

@@ -263,20 +263,12 @@ export default function Play() {
             <Button variant="outline" onClick={() => setSetupModal(true)}>
               Setup
             </Button>
-            <Button
-              disabled={loading || fetchError}
-              onClick={start}
-              variant="solid"
-            >
+            <Button disabled={loading || fetchError} onClick={start}>
               Start
             </Button>
           </>
         )}
-        {status === "started" && (
-          <Button onClick={stopGame} variant="solid">
-            Stop
-          </Button>
-        )}
+        {status === "started" && <Button onClick={stopGame} variant="tertiary">Stop</Button>}
       </div>
       {setupModal && (
         <SetupModal

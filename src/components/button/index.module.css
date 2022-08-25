@@ -1,4 +1,5 @@
 .button {
+  font-family: "nunito-b";
   min-width: 130px;
   width: 100%;
   padding: 10px 30px;
@@ -11,14 +12,34 @@
   cursor: pointer;
 }
 
-.solid {
+.primary {
   color: var(--white-color);
   background-color: var(--primary-color-light);
   transition: 0.2s;
 }
 
-.solid:hover {
+.primary:hover {
   background-color: var(--primary-color-lighter);
+}
+
+.secondary {
+  color: var(--white-color);
+  background-color: var(--red-color);
+  transition: 0.2s;
+}
+
+.secondary:hover {
+  background-color: var(--red-color-light);
+}
+
+.tertiary {
+  color: var(--red-color);
+  background-color: var(--white-color);
+  transition: 0.2s;
+}
+
+.tertairy:hover {
+  background-color: var(--white-color-dark);
 }
 
 .outline {
@@ -43,4 +64,3 @@
   background: none;
   color: var(--white-color);
 }
-
