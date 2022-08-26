@@ -15,6 +15,23 @@
   -webkit-backdrop-filter: blur(10px);
 }
 
+.quit,
+.instruction {
+  position: absolute;
+  top: 5%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.quit {
+  left: 5%;
+}
+
+.instruction {
+  right: 5%;
+}
+
 .countdown {
   font-size: 40px;
   margin-bottom: 5px;
@@ -115,7 +132,8 @@
   margin-top: 15px;
 }
 
-.action-buttons button:nth-of-type(1) {
+.action-buttons button:nth-of-type(1),
+.action-buttons button:nth-of-type(2) {
   margin-right: 20px;
 }
 
@@ -152,16 +170,22 @@
 }
 
 @media screen and (min-width: 768px) {
+  .quit,
+  .instruction {
+    width: 30px;
+    height: 30px;
+  }
+
+  .countdown {
+    font-size: 45px;
+  }
+
   .displays-container {
     width: 58%;
     padding: 17px;
     border-radius: 10px;
     background: var(--primary-color-darkest);
     margin-bottom: 20px;
-  }
-
-  .countdown {
-    font-size: 45px;
   }
 
   .output-display {

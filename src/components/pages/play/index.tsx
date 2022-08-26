@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useCountdown } from "usehooks-ts";
+import Link from "next/link";
+import Image from "next/image";
+import Button from "../../button";
+import { motion } from "framer-motion";
 import styles from "./index.module.css";
+import { useCountdown } from "usehooks-ts";
 import { fetchRandomQuote } from "../../../apis";
 import SetupModal from "../../modals/setupModal";
 import CompletionModal from "../../modals/completionModal";
-import Button from "../../button";
+import InstructionModal from "../../modals/instructionModal";
 import { wordFormatter } from "../../../helpers/wordFormatter";
 
 export default function Play() {
@@ -20,6 +24,7 @@ export default function Play() {
   const [wordErrorIndexes, setWordErrorIndexes] = useState(Array<number>);
   const [fetchError, setFetchError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [setupModal, setSetupModal] = useState(false);
   const [completionModal, setCompletionModal] = useState(false);
   const [inputType, setInputType] = useState<"space" | "text">("text");
@@ -184,6 +189,24 @@ export default function Play() {
 
   return (
     <div className={styles["main-container"]}>
+      <motion.div whileHover={{ scale: 1.1 }} className={styles["quit"]}>
+        <Link href="/">
+          <Image
+            src={require("../../../assets/icons/back-arrow.svg")}
+            alt="close icon"
+          />
+        </Link>
+      </motion.div>
+      <motion.div
+        onClick={() => setShowModal(true)}
+        whileHover={{ scale: 1.1 }}
+        className={styles["instruction"]}
+      >
+        <Image
+          src={require("../../../assets/icons/instruction.svg")}
+          alt="instruction icon"
+        />
+      </motion.div>
       <p
         className={`${styles["countdown"]} ${
           styles[`${count <= 5 ? "danger" : count <= 10 ? "warning" : ""}`]
@@ -294,6 +317,7 @@ export default function Play() {
           restart={resetGame}
         />
       )}
+      {showModal && <InstructionModal close={() => setShowModal(false)} />}
     </div>
   );
 }

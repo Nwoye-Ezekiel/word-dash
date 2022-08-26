@@ -7,6 +7,7 @@ interface ModalTemplateProps {
   close: () => void;
   children: JSX.Element;
   icon?: boolean;
+  type?: "action" | "info";
 }
 
 export default function ModalTemplate({
@@ -14,10 +15,11 @@ export default function ModalTemplate({
   close,
   children,
   icon = true,
+  type = "action",
 }: ModalTemplateProps) {
   return (
     <div className={styles["modal-wrapper"]}>
-      <div className={styles["modal-container"]}>
+      <div className={`${styles["modal-container"]} ${styles[`${type}`]}`}>
         <div className={styles["header-container"]}>
           <h2 className={styles["modal-header"]}>{header}</h2>
           <hr />
