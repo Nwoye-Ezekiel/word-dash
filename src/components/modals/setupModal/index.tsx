@@ -66,10 +66,8 @@ export default function SetupModal({
 
   const handleKeyDown = (e: EventType, inputType: "number" | "textarea") => {
     if (inputType === "number") {
-      console.log(e);
       if ([".", "-", "+", "e", "E"].includes(e.key)) {
         e.preventDefault();
-        toast.error("Input not allowed!");
       }
     } else if (inputType === "textarea") {
       if (
