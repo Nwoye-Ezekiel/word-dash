@@ -53,7 +53,7 @@ export default function SetupModal({
   const handleEditedMin = (value: number) => {
     setEditedMin(value);
     if (value < 0) {
-      toast.error("Minutes must be greater than 0");
+      toast.error("Minutes must not be negative");
     } else if (value > 10) {
       toast.error("Minutes must not exceed 10");
     }
@@ -62,7 +62,7 @@ export default function SetupModal({
   const handleEditedSec = (value: number) => {
     setEditedSec(value);
     if (value < 0) {
-      toast.error("Seconds must be greater than 0");
+      toast.error("Seconds must not be negative");
     } else if (value > 59) {
       toast.error("Seconds must not exceed 59");
     }
