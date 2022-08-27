@@ -5,10 +5,6 @@ import Button from "../../button";
 import { timeConverter } from "../../../helpers/timeConverter";
 import toast from "react-hot-toast";
 
-type EventType =
-  | React.KeyboardEvent<HTMLInputElement>
-  | React.KeyboardEvent<HTMLTextAreaElement>;
-
 interface SetupModalProps {
   customWords: string;
   timer: number;
@@ -33,7 +29,7 @@ export default function SetupModal({
   const [editedMin, setEditedMin] = useState(customTimer ? min : 0);
   const [editedSec, setEditedSec] = useState(customTimer ? sec : 0);
 
-  const handleEditModeChange = () => {
+  const handleModeChange = () => {
     if (editMode === false) {
       setEditMode(true);
       setSelectedOption(0);
@@ -44,41 +40,50 @@ export default function SetupModal({
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if ([".", "-", "+", "e", "E"].includes(e.key)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleCustomTimer = (value: number, unit: "min" | "sec") => {
+    if (unit === "min") {
+      setEditedMin(value);
+      if (value > 10) {
+        toast.error("Timer minutes must not exceed 10!");
+      }
+    } else if (unit === "sec") {
+      setEditedSec(value);
+      if (value > 59) {
+        toast.error("Timer seconds must not exceed 59!");
+      }
+    }
+  };
+
+  const handleValidation = () => {
+    return (
+      (customTimer &&
+        editedMin === min &&
+        editedSec === sec &&
+        inputChanges.trim() === customWords) ||
+      (!customTimer &&
+        selectedOption === timer &&
+        inputChanges.trim() === customWords) ||
+      (editedMin === 0 && editedSec === 0 && selectedOption === 0) ||
+      editedMin < 0 ||
+      editedMin > 10 ||
+      editedSec < 0 ||
+      editedSec > 59 ||
+      inputChanges.trim().length === 0 ||
+      inputChanges.trim().length > 300
+    );
+  };
+
   const handleAppliedChanges = () => {
     createQuote(inputChanges);
     createTimer(editMode ? 60 * editedMin + editedSec : selectedOption);
+    toast.success("Setup was successful!");
     close();
-  };
-
-  const handleEditedMin = (value: number) => {
-    setEditedMin(value);
-    if (value > 10) {
-      toast.error("It must not exceed 10 minutes!");
-    }
-  };
-
-  const handleEditedSec = (value: number) => {
-    setEditedSec(value);
-    if (value > 59) {
-      toast.error("It must not exceed 59 seconds!");
-    }
-  };
-
-  const handleKeyDown = (e: EventType, inputType: "number" | "textarea") => {
-    if (inputType === "number") {
-      if ([".", "-", "+", "e", "E"].includes(e.key)) {
-        e.preventDefault();
-      }
-    } else if (inputType === "textarea") {
-      if (
-        e.target.value.length === 300 &&
-        e.code !== "Backspace" &&
-        e.code !== "Delete"
-      ) {
-        e.preventDefault();
-        toast.error("Only a maximum of 300 characters is allowed!");
-      }
-    }
   };
 
   return (
@@ -88,20 +93,24 @@ export default function SetupModal({
           <p className={styles["label"]}>Quote</p>
           <textarea
             defaultValue={customWords}
-            onChange={(e) => setInputChanges(e.target.value)}
-            onKeyDown={(e) => handleKeyDown(e, "textarea")}
+            onChange={(e) => {
+              const trimmedValue = e.target.value.slice(0, 300);
+              if (e.target.value.length > 300) {
+                e.target.value = trimmedValue;
+                setInputChanges(trimmedValue);
+                toast.error("Only a maximum of 300 characters is allowed!");
+              } else {
+                setInputChanges(e.target.value);
+              }
+            }}
             className={styles["input-container"]}
-            maxLength={300}
           />
           <div className={styles["character-count"]}>{inputChanges.length}</div>
         </div>
         <div className={styles["timer-wrapper"]}>
           <div className={styles["timer-header"]}>
             <p className={styles["label"]}>Timer(min : sec)</p>
-            <p
-              className={styles["mode"]}
-              onClick={() => handleEditModeChange()}
-            >
+            <p className={styles["mode"]} onClick={() => handleModeChange()}>
               {editMode ? "Select Options" : "Customize Timer"}
             </p>
           </div>
@@ -130,8 +139,10 @@ export default function SetupModal({
                   max={10}
                   type="number"
                   defaultValue={editedMin}
-                  onKeyDown={(e) => handleKeyDown(e, "number")}
-                  onChange={(e) => handleEditedMin(parseInt(e.target.value))}
+                  onKeyDown={(e) => handleKeyDown(e)}
+                  onChange={(e) =>
+                    handleCustomTimer(parseInt(e.target.value), "min")
+                  }
                 />
                 <span className={styles["colon-separator"]}> : </span>
                 <input
@@ -139,34 +150,17 @@ export default function SetupModal({
                   max={59}
                   type="number"
                   defaultValue={editedSec}
-                  onKeyDown={(e) => handleKeyDown(e, "number")}
-                  onChange={(e) => handleEditedSec(parseInt(e.target.value))}
+                  onKeyDown={(e) => handleKeyDown(e)}
+                  onChange={(e) =>
+                    handleCustomTimer(parseInt(e.target.value), "sec")
+                  }
                 />
               </div>
             )}
           </ul>
         </div>
         <Button
-          disabled={
-            // previously set custom timer and quote are not edited.
-            (customTimer &&
-              editedMin === min &&
-              editedSec === sec &&
-              inputChanges.trim() === customWords) ||
-            // previously selected timer and quote are not edited.
-            (!customTimer &&
-              selectedOption === timer &&
-              inputChanges.trim() === customWords) ||
-            // Ensures a timer is set.
-            (editedMin === 0 && editedSec === 0 && selectedOption === 0) ||
-            // Ensures custom timer is valid.
-            editedMin < 0 ||
-            editedMin > 10 ||
-            editedSec < 0 ||
-            editedSec > 59 ||
-            // Prevents empty quotes.
-            inputChanges.trim().length === 0
-          }
+          disabled={handleValidation()}
           onClick={handleAppliedChanges}
           variant="secondary"
         >

@@ -61,7 +61,8 @@ export default function Play() {
   const generateNewQuote = async () => {
     try {
       setLoading(true);
-      const quote = await fetchRandomQuote();
+      let quote = await fetchRandomQuote();
+      quote = quote.substring(0, 300);
       createQuote(quote);
       fetchError && setFetchError(false);
     } catch (e) {
