@@ -93,7 +93,6 @@ export default function Play() {
     }
 
     if (e.code === "Space") {
-      console.log("space");
       setInputType("space");
     } else setInputType("text");
   };
@@ -293,7 +292,7 @@ export default function Play() {
           </>
         )}
         {status === "started" && (
-          <Button onClick={stopGame} variant="tertiary">
+          <Button onClick={stopGame} variant="secondary2">
             Stop
           </Button>
         )}

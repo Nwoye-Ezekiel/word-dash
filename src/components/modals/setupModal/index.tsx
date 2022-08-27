@@ -162,7 +162,7 @@ export default function SetupModal({
         <Button
           disabled={handleValidation()}
           onClick={handleAppliedChanges}
-          variant="secondary"
+          variant="primary2"
         >
           Apply Changes
         </Button>

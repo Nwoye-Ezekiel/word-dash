@@ -92,7 +92,7 @@ export default function CompletionModal({
               reset(true);
               close();
             }}
-            variant="secondary"
+            variant="primary2"
           >
             Retry
           </Button>

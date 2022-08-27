@@ -13,10 +13,10 @@ export default function Home() {
         <Image src={require("../../../assets/images/logo.svg")} alt="logo" />
       </span>
       <div className={styles["action-buttons"]}>
-        <Link href="/play">
-          <Button>Play Game</Button>
-        </Link>
         <Button onClick={() => setShowModal(true)} variant="outline">About Game</Button>
+        <Link href="/play">
+          <Button variant="secondary1">Play Game</Button>
+        </Link>
       </div>
       {showModal && <AboutGameModal close={() => setShowModal(false)} />}
     </div>

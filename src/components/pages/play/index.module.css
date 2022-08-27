@@ -52,7 +52,7 @@
   width: 90%;
   margin: 20px 20px 40px;
   border-radius: 5px;
-  background: var(--primary-color-darkest);
+  background: var(--primary-color-darker);
   color: var(--white-color);
 }
 
@@ -62,7 +62,7 @@
   border-radius: 5px;
   height: 6px;
   overflow: hidden;
-  background-color: var(--primary-color-darkest);
+  background-color: var(--primary-color-darker);
   margin-top: 5px;
   margin-bottom: 15px;
 }
@@ -189,7 +189,7 @@
     width: 58%;
     padding: 17px;
     border-radius: 10px;
-    background: var(--primary-color-darkest);
+    background: var(--primary-color-darker);
     margin-bottom: 20px;
   }
 
