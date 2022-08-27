@@ -3,6 +3,11 @@ import styles from "./index.module.css";
 import ModalTemplate from "..";
 import Button from "../../button";
 import { timeConverter } from "../../../helpers/timeConverter";
+import toast from "react-hot-toast";
+
+type EventType =
+  | React.KeyboardEvent<HTMLInputElement>
+  | React.KeyboardEvent<HTMLTextAreaElement>;
 
 interface SetupModalProps {
   customWords: string;
@@ -45,6 +50,43 @@ export default function SetupModal({
     close();
   };
 
+  const handleEditedMin = (value: number) => {
+    setEditedMin(value);
+    if (value < 0) {
+      toast.error("Minutes must be greater than 0");
+    } else if (value > 10) {
+      toast.error("Minutes must not exceed 10");
+    }
+  };
+
+  const handleEditedSec = (value: number) => {
+    setEditedSec(value);
+    if (value < 0) {
+      toast.error("Seconds must be greater than 0");
+    } else if (value > 59) {
+      toast.error("Seconds must not exceed 59");
+    }
+  };
+
+  const handleKeyDown = (e: EventType, inputType: "number" | "textarea") => {
+    if (inputType === "number") {
+      console.log(e);
+      if ([".", "-", "+", "e", "E"].includes(e.key)) {
+        e.preventDefault();
+        toast.error("Input not allowed!");
+      }
+    } else if (inputType === "textarea") {
+      if (
+        e.target.value.length === 300 &&
+        e.code !== "Backspace" &&
+        e.code !== "Delete"
+      ) {
+        e.preventDefault();
+        toast.error("Only a maximum of 300 characters is allowed!");
+      }
+    }
+  };
+
   return (
     <ModalTemplate header="Game Setup" close={close}>
       <>
@@ -53,6 +95,7 @@ export default function SetupModal({
           <textarea
             defaultValue={customWords}
             onChange={(e) => setInputChanges(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e, "textarea")}
             className={styles["input-container"]}
             maxLength={300}
           />
@@ -89,19 +132,21 @@ export default function SetupModal({
             ) : (
               <div className={styles["edit-container"]}>
                 <input
-                  defaultValue={editedMin}
-                  onChange={(e) => setEditedMin(+e.target.value)}
-                  type="number"
                   min={0}
-                  max={30}
+                  max={10}
+                  type="number"
+                  defaultValue={editedMin}
+                  onKeyDown={(e) => handleKeyDown(e, "number")}
+                  onChange={(e) => handleEditedMin(parseInt(e.target.value))}
                 />
                 <span className={styles["colon-separator"]}> : </span>
                 <input
-                  defaultValue={editedSec}
-                  onChange={(e) => setEditedSec(+e.target.value)}
-                  type="number"
                   min={0}
-                  max={60}
+                  max={59}
+                  type="number"
+                  defaultValue={editedSec}
+                  onKeyDown={(e) => handleKeyDown(e, "number")}
+                  onChange={(e) => handleEditedSec(parseInt(e.target.value))}
                 />
               </div>
             )}
@@ -109,16 +154,23 @@ export default function SetupModal({
         </div>
         <Button
           disabled={
+            // previously set custom timer and quote are not edited.
             (customTimer &&
               editedMin === min &&
               editedSec === sec &&
-              inputChanges === customWords) ||
+              inputChanges.trim() === customWords) ||
+            // previously selected timer and quote are not edited.
             (!customTimer &&
               selectedOption === timer &&
-              inputChanges === customWords) ||
+              inputChanges.trim() === customWords) ||
+            // Ensures a timer is set.
             (editedMin === 0 && editedSec === 0 && selectedOption === 0) ||
+            // Ensures custom timer is valid.
             editedMin < 0 ||
+            editedMin > 10 ||
             editedSec < 0 ||
+            editedSec > 59 ||
+            // Prevents empty quotes.
             inputChanges.trim().length === 0
           }
           onClick={handleAppliedChanges}

@@ -3,12 +3,13 @@ import type { AppProps } from "next/app";
 import Image from "next/image";
 import Head from "next/head";
 import "../styles/index.css";
+import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isImageLoading, setIsImageLoading] = useState(true);
 
   return (
-    <>
+    <div>
       <Head>
         <title>Word Dash</title>
         <link rel="preload" as="image" href="../assets/images/liquid.svg" />
@@ -30,7 +31,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       ) : (
         <Component {...pageProps} />
       )}
-    </>
+      <Toaster />
+    </div>
   );
 }
 

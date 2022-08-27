@@ -19,7 +19,7 @@
   resize: none;
   border-radius: 5px;
   margin-bottom: 10px;
-  border: 1px gray solid;
+  border: 1px var(--gray-color) solid;
   padding: 10px;
   outline: 0;
 }
@@ -71,7 +71,7 @@
 .timer-container {
   display: flex;
   width: 100%;
-  border: 1px gray solid;
+  border: 1px var(--gray-color) solid;
   border-radius: 5px;
   overflow: hidden;
 }
@@ -83,7 +83,7 @@
   height: 40px;
   cursor: pointer;
   width: 100%;
-  border-right: 1px gray solid;
+  border-right: 1px var(--gray-color) solid;
 }
 
 .timer-option:first-of-type {
@@ -126,4 +126,13 @@
   padding-bottom: 2px;
   font-size: 20px;
   font-family: "nunito-b";
+}
+
+.note {
+  font-family: "nunito-b";
+  color: var(--red-color);
+}
+
+.hidden {
+  opacity: 0;
 }

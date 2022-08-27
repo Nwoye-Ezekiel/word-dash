@@ -155,10 +155,10 @@ export default function Play() {
     }
   };
 
-  const resetGame = () => {
+  const resetGame = (retry: boolean) => {
     setStatus("waiting");
     resetCountdown();
-    generateNewQuote();
+    !retry && generateNewQuote();
     setDisplayedWordIndex(0);
     setTypedWord("");
     setTypedWords("");
@@ -314,7 +314,7 @@ export default function Play() {
           totalWords={displayedWords.length}
           totalTyped={displayedWordIndex}
           correctScore={correctScore}
-          restart={resetGame}
+          reset={resetGame}
         />
       )}
       {showModal && <InstructionModal close={() => setShowModal(false)} />}

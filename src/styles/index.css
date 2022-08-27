@@ -9,6 +9,7 @@
   --white-color-darker: #d6e2d6;
   --white-color-dark: #ededed;
   --white-color: #f6f6f6;
+  --gray-color: #808080;
   --black-color: #000000cc;
   --transparent-color: #00000080;
   --yellow-color: yellow;
@@ -50,6 +51,7 @@ main {
 }
 
 body {
+  position: relative;
   width: 100%;
   height: 100%;
   font-family: Segoe UI, Helvetica, sans-serif;

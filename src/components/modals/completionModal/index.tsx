@@ -2,9 +2,7 @@ import React from "react";
 import styles from "./index.module.css";
 import ModalTemplate from "..";
 import Button from "../../button";
-import Link from "next/link";
 import { timeConverter } from "../../../helpers/timeConverter";
-import { count } from "console";
 
 interface CompletionModalProps {
   timer: number;
@@ -13,7 +11,7 @@ interface CompletionModalProps {
   totalWords: number;
   totalTyped: number;
   correctScore: number;
-  restart: () => void;
+  reset: (retry: boolean) => void;
 }
 
 export default function CompletionModal({
@@ -23,7 +21,7 @@ export default function CompletionModal({
   totalWords,
   totalTyped,
   correctScore,
-  restart,
+  reset,
 }: CompletionModalProps) {
   const timeElapsed = timer - count;
   const [min, sec] = timeConverter(timeElapsed);
@@ -37,11 +35,6 @@ export default function CompletionModal({
       : timeElapsed === 0 && totalTyped === 0
       ? 0
       : Math.round(totalTyped / (timeElapsed / 60));
-
-  const handleRestart = () => {
-    restart();
-    close();
-  };
 
   return (
     <ModalTemplate header="Game Over" close={close} icon={false}>
@@ -94,10 +87,23 @@ export default function CompletionModal({
           </div>
         </div>
         <div className={styles["action-buttons"]}>
-          <Button onClick={handleRestart}>Try Again</Button>
-          <Link href="/">
-            <Button>Go Home</Button>
-          </Link>
+          <Button
+            onClick={() => {
+              reset(true);
+              close();
+            }}
+            variant="secondary"
+          >
+            Retry
+          </Button>
+          <Button
+            onClick={() => {
+              reset(false);
+              close();
+            }}
+          >
+            Next
+          </Button>
         </div>
       </div>
     </ModalTemplate>

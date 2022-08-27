@@ -25,6 +25,7 @@
   border-radius: 20px;
   flex-direction: column;
   justify-content: center;
+  transform: 0.5s ease-in-out;
 }
 
 .action{
