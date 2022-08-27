@@ -20,68 +20,22 @@ export default function SetupModal({
   createQuote,
   close,
 }: SetupModalProps) {
-  const options = [30, 60, 120, 180];
-  const [customTimer] = useState(!options.includes(timer));
-  const [min, sec] = timeConverter(timer);
+  const options = [15, 30, 45, 60];
   const [inputChanges, setInputChanges] = useState(customWords);
-  const [selectedOption, setSelectedOption] = useState(customTimer ? 0 : timer);
-  const [editMode, setEditMode] = useState(customTimer ? true : false);
-  const [editedMin, setEditedMin] = useState(customTimer ? min : 0);
-  const [editedSec, setEditedSec] = useState(customTimer ? sec : 0);
-
-  const handleModeChange = () => {
-    if (editMode === false) {
-      setEditMode(true);
-      setSelectedOption(0);
-    } else {
-      setEditMode(false);
-      setEditedMin(0);
-      setEditedSec(0);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if ([".", "-", "+", "e", "E"].includes(e.key)) {
-      e.preventDefault();
-    }
-  };
-
-  const handleCustomTimer = (value: number, unit: "min" | "sec") => {
-    if (unit === "min") {
-      setEditedMin(value);
-      if (value > 10) {
-        toast.error("Timer minutes must not exceed 10!");
-      }
-    } else if (unit === "sec") {
-      setEditedSec(value);
-      if (value > 59) {
-        toast.error("Timer seconds must not exceed 59!");
-      }
-    }
-  };
+  const [selectedOption, setSelectedOption] = useState(timer);
 
   const handleValidation = () => {
     return (
-      (customTimer &&
-        editedMin === min &&
-        editedSec === sec &&
-        inputChanges.trim() === customWords) ||
-      (!customTimer &&
-        selectedOption === timer &&
-        inputChanges.trim() === customWords) ||
-      (editedMin === 0 && editedSec === 0 && selectedOption === 0) ||
-      editedMin < 0 ||
-      editedMin > 10 ||
-      editedSec < 0 ||
-      editedSec > 59 ||
-      inputChanges.trim().length === 0 ||
-      inputChanges.trim().length > 300
+      selectedOption === timer &&
+      (inputChanges.trim() === customWords ||
+        inputChanges.trim().length === 0 ||
+        inputChanges.trim().length > 150)
     );
   };
 
   const handleAppliedChanges = () => {
     createQuote(inputChanges);
-    createTimer(editMode ? 60 * editedMin + editedSec : selectedOption);
+    createTimer(selectedOption);
     toast.success("Setup was successful!");
     close();
   };
@@ -94,11 +48,11 @@ export default function SetupModal({
           <textarea
             defaultValue={customWords}
             onChange={(e) => {
-              const trimmedValue = e.target.value.slice(0, 300);
-              if (e.target.value.length > 300) {
+              const trimmedValue = e.target.value.slice(0, 150);
+              if (e.target.value.length > 150) {
                 e.target.value = trimmedValue;
                 setInputChanges(trimmedValue);
-                toast.error("Only a maximum of 300 characters is allowed!");
+                toast.error("Quote must not exceed 150 characters!");
               } else {
                 setInputChanges(e.target.value);
               }
@@ -110,53 +64,22 @@ export default function SetupModal({
         <div className={styles["timer-wrapper"]}>
           <div className={styles["timer-header"]}>
             <p className={styles["label"]}>Timer(min : sec)</p>
-            <p className={styles["mode"]} onClick={() => handleModeChange()}>
-              {editMode ? "Select Options" : "Customize Timer"}
-            </p>
           </div>
           <ul className={styles["timer-container"]}>
-            {!editMode ? (
-              options.map((option, index) => {
-                const [min, sec] = timeConverter(option);
-                return (
-                  <li
-                    key={index}
-                    className={`${styles["timer-option"]} ${
-                      styles[
-                        `${option === selectedOption && "selected-option"}`
-                      ]
-                    }`}
-                    onClick={() => setSelectedOption(option)}
-                  >
-                    {`${min} : ${sec === 0 ? "00" : sec}`}
-                  </li>
-                );
-              })
-            ) : (
-              <div className={styles["edit-container"]}>
-                <input
-                  min={0}
-                  max={10}
-                  type="number"
-                  defaultValue={editedMin}
-                  onKeyDown={(e) => handleKeyDown(e)}
-                  onChange={(e) =>
-                    handleCustomTimer(parseInt(e.target.value), "min")
-                  }
-                />
-                <span className={styles["colon-separator"]}> : </span>
-                <input
-                  min={0}
-                  max={59}
-                  type="number"
-                  defaultValue={editedSec}
-                  onKeyDown={(e) => handleKeyDown(e)}
-                  onChange={(e) =>
-                    handleCustomTimer(parseInt(e.target.value), "sec")
-                  }
-                />
-              </div>
-            )}
+            {options.map((option, index) => {
+              const [min, sec] = timeConverter(option);
+              return (
+                <li
+                  key={index}
+                  className={`${styles["timer-option"]} ${
+                    styles[`${option === selectedOption && "selected-option"}`]
+                  }`}
+                  onClick={() => setSelectedOption(option)}
+                >
+                  {`${min} : ${sec === 0 ? "00" : sec}`}
+                </li>
+              );
+            })}
           </ul>
         </div>
         <Button

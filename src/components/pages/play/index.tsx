@@ -12,7 +12,7 @@ import InstructionModal from "../../modals/instructionModal";
 import { wordFormatter } from "../../../helpers/wordFormatter";
 
 export default function Play() {
-  const DEFAULT_TIME = 30;
+  const DEFAULT_TIME = 60;
   const [customWords, setCustomWords] = useState("");
   const [displayedWords, setDisplayedWords] = useState(Array<string>);
   const [displayedWordIndex, setDisplayedWordIndex] = useState(0);
@@ -62,7 +62,6 @@ export default function Play() {
     try {
       setLoading(true);
       let quote = await fetchRandomQuote();
-      quote = quote.substring(0, 300);
       createQuote(quote);
       fetchError && setFetchError(false);
     } catch (e) {

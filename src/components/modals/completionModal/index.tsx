@@ -94,7 +94,7 @@ export default function CompletionModal({
             }}
             variant="primary2"
           >
-            Retry
+            Try Again
           </Button>
           <Button
             onClick={() => {
