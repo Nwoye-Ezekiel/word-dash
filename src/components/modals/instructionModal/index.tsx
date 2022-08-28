@@ -7,16 +7,19 @@ export default function InstructionModal({ close }: { close: () => void }) {
     <ModalTemplate header="Instruction" type="info" close={close}>
       <p className={styles["content"]}>
         <p>
-          To preset the game to your liking, press the setup button. This allows
-          you to modify the quote that is presently being displayed and you can
-          either choose from the various timing options or customize your own
-          timer.
+          Two fields are provided, the top for displaying quotes and the bottom
+          for typing quotes. Each time the <span>Get New Quote</span> button is
+          clicked, a new quote is generated.
         </p>
         <p>
-          As soon as the game begins, the timer starts counting down, and if you
-          can&apos;t finish typing before it runs out, the game stops and you
-          lose points. You will be provided with an analysis of your performance
-          after the game is finished.
+          The <span>Setup</span> button opens a modal where you can either
+          modify the quote being displayed or select a timer from the various
+          timing options provided.
+        </p>
+        <p>
+          The timer starts counting down as soon as the game begins. After the
+          game is finished, you will be provided with an analysis of your
+          performance.
         </p>
       </p>
     </ModalTemplate>

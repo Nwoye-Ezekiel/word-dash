@@ -5,3 +5,8 @@
 .content p {
   margin-bottom: 10px;
 }
+
+.content span {
+  font-family: "nunito-b";
+  color: var(--red-color);
+}

@@ -227,7 +227,9 @@ export default function Play() {
               ></div>
             </div>
             {loading ? (
-              <span className={`${styles["fetching"]}`}>Fetching Quote...</span>
+              <span className={`${styles["fetching"]}`}>
+                Generating Quote...
+              </span>
             ) : displayedWords.length === 0 && fetchError ? (
               <span className={`${styles["error"]}`}>
                 An error occurred while fetching quote. Try again.
@@ -259,7 +261,7 @@ export default function Play() {
               className={styles["fetch-quote"]}
               onClick={() => generateNewQuote()}
             >
-              Fetch New Quote
+              Get New Quote
             </p>
           )}
         </div>

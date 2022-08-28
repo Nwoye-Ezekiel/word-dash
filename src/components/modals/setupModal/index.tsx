@@ -47,17 +47,9 @@ export default function SetupModal({
           <p className={styles["label"]}>Quote</p>
           <textarea
             defaultValue={customWords}
-            onChange={(e) => {
-              const trimmedValue = e.target.value.slice(0, 150);
-              if (e.target.value.length > 150) {
-                e.target.value = trimmedValue;
-                setInputChanges(trimmedValue);
-                toast.error("Quote must not exceed 150 characters!");
-              } else {
-                setInputChanges(e.target.value);
-              }
-            }}
+            onChange={(e) => setInputChanges(e.target.value)}
             className={styles["input-container"]}
+            maxLength={150}
           />
           <div className={styles["character-count"]}>{inputChanges.length}</div>
         </div>
