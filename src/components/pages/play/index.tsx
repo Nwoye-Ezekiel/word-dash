@@ -219,7 +219,7 @@ export default function Play() {
       </motion.div>
       <p
         className={`${styles["countdown"]} ${
-          styles[`${count <= 5 ? "danger" : count <= 10 ? "warning" : ""}`]
+          styles[`${count <= 5 ? "danger" : count <= 10 ? "warning" : "safe"}`]
         }`}
       >
         {count}
@@ -227,13 +227,21 @@ export default function Play() {
       <div className={styles["displays-container"]}>
         <div className={styles["output-wrapper"]}>
           <div className={styles["output-display"]}>
-            <div className={styles["completion-bar-container"]}>
+            <div className={styles["bar-container"]}>
               <div
-                className={styles["bar"]}
+                className={`${styles["bar"]} ${
+                  styles[
+                    `${
+                      count <= 5
+                        ? "bar-danger"
+                        : count <= 10
+                        ? "bar-warning"
+                        : "bar-safe"
+                    }`
+                  ]
+                }`}
                 style={{
-                  width: `${Math.round(
-                    (displayedWordIndex / displayedWords.length) * 100
-                  )}%`,
+                  width: `${Math.round((count / timer) * 100)}%`,
                 }}
               ></div>
             </div>
