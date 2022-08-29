@@ -243,7 +243,7 @@ export default function Play() {
               </span>
             ) : displayedWords.length === 0 && fetchError ? (
               <span className={`${styles["error"]}`}>
-                An error occurred while fetching quote. Try again.
+                An error occurred while generating quote. Try again.
               </span>
             ) : (
               displayedWords?.map((word, wordIndex) => (
