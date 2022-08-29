@@ -8,11 +8,11 @@ export default function InstructionModal({ close }: { close: () => void }) {
       <p className={styles["content"]}>
         <p>
           Two text fields are provided, the top for displaying quotes and the
-          bottom for typing quotes. Each time the Get New Quote button is
+          bottom for typing quotes. Each time the <span>Get new quote</span> button is
           clicked, a new quote is generated.
         </p>
         <p>
-          The Setup button opens a modal where you can either modify the quote
+          The <span>Setup</span> button opens a modal where you can either modify the quote
           being displayed or select a timer from the various timing options
           provided.
         </p>
