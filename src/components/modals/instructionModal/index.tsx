@@ -8,13 +8,13 @@ export default function InstructionModal({ close }: { close: () => void }) {
       <p className={styles["content"]}>
         <p>
           Two text fields are provided, the top for displaying quotes and the
-          bottom for typing quotes. Each time the <span>Get New Quote</span>{" "}
-          button is clicked, a new quote is generated.
+          bottom for typing quotes. Each time the Get New Quote button is
+          clicked, a new quote is generated.
         </p>
         <p>
-          The <span>Setup</span> button opens a modal where you can either
-          modify the quote being displayed or select a timer from the various
-          timing options provided.
+          The Setup button opens a modal where you can either modify the quote
+          being displayed or select a timer from the various timing options
+          provided.
         </p>
         <p>
           The timer starts counting down as soon as the game begins. After the
