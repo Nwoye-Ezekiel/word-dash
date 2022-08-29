@@ -7,9 +7,9 @@ export default function InstructionModal({ close }: { close: () => void }) {
     <ModalTemplate header="Instruction" type="info" close={close}>
       <p className={styles["content"]}>
         <p>
-          Two fields are provided, the top for displaying quotes and the bottom
-          for typing quotes. Each time the <span>Get New Quote</span> button is
-          clicked, a new quote is generated.
+          Two text fields are provided, the top for displaying quotes and the
+          bottom for typing quotes. Each time the <span>Get New Quote</span>{" "}
+          button is clicked, a new quote is generated.
         </p>
         <p>
           The <span>Setup</span> button opens a modal where you can either

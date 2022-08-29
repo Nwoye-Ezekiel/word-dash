@@ -60,6 +60,7 @@
   border: 1px var(--gray-color) solid;
   border-radius: 5px;
   overflow: hidden;
+  margin-bottom: 5px;
 }
 
 .timer-option {
@@ -87,6 +88,32 @@
 .selected-option {
   font-family: "nunito-b";
   background-color: var(--white-color);
+  color: var(--red-color);
+}
+
+.difficulty-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.difficulty-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.difficulty {
+  font-size: small;
+  border-radius: 50px;
+  background-color: var(--white-color);
+  padding: 0 15px;
+}
+
+.selected-difficulty {
+  font-family: "nunito-b";
   color: var(--red-color);
 }
 

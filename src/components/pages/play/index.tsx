@@ -38,6 +38,17 @@ export default function Play() {
   const textInput = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
+    const element = textInput.current;
+    element?.addEventListener(
+      "select",
+      () => {
+        element.selectionStart = element.selectionEnd;
+      },
+      false
+    );
+  }, []);
+
+  useEffect(() => {
     generateNewQuote();
   }, []);
 
@@ -268,6 +279,7 @@ export default function Play() {
         <textarea
           ref={textInput}
           value={typedWords}
+          unselectable="on"
           onChange={(e) => handleInputChange(e.target.value)}
           className={styles["input-display"]}
           onKeyDown={(e) => {

@@ -20,7 +20,8 @@ export default function SetupModal({
   createQuote,
   close,
 }: SetupModalProps) {
-  const options = [15, 30, 45, 60];
+  const options = [60, 45, 30];
+  const difficulties = ["Easy", "Medium", "Hard"];
   const [inputChanges, setInputChanges] = useState(customWords);
   const [selectedOption, setSelectedOption] = useState(timer);
 
@@ -61,18 +62,40 @@ export default function SetupModal({
             {options.map((option, index) => {
               const [min, sec] = timeConverter(option);
               return (
-                <li
-                  key={index}
-                  className={`${styles["timer-option"]} ${
-                    styles[`${option === selectedOption && "selected-option"}`]
-                  }`}
-                  onClick={() => setSelectedOption(option)}
-                >
-                  {`${min} : ${sec === 0 ? "00" : sec}`}
-                </li>
+                <>
+                  <li
+                    key={index}
+                    className={`${styles["timer-option"]} ${
+                      styles[
+                        `${option === selectedOption && "selected-option"}`
+                      ]
+                    }`}
+                    onClick={() => setSelectedOption(option)}
+                  >
+                    {`${min} : ${sec === 0 ? "00" : sec}`}
+                  </li>
+                </>
               );
             })}
           </ul>
+          <div className={styles["difficulty-wrapper"]}>
+            {difficulties.map((difficulty: string, index: number) => (
+              <span key={index} className={styles["difficulty-container"]}>
+                <span
+                  className={`${styles["difficulty"]} ${
+                    styles[
+                      `${
+                        index === options.indexOf(selectedOption) &&
+                        "selected-difficulty"
+                      }`
+                    ]
+                  }`}
+                >
+                  {difficulty}
+                </span>
+              </span>
+            ))}
+          </div>
         </div>
         <Button
           disabled={handleValidation()}
