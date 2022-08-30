@@ -273,7 +273,7 @@ export default function Play() {
           </div>
           <p
             className={`${styles["fetch-quote"]} ${
-              styles[`${(status === "started" || loading) && "disable"}`]
+              styles[`${(status === "started" || loading) && "disabled"}`]
             }`}
             onClick={() => generateNewQuote()}
           >

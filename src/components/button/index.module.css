@@ -1,7 +1,5 @@
 .button {
-  top: 642px;
   width: 100%;
-  left: 847px;
   height: 50px;
   border: none;
   cursor: pointer;
@@ -63,7 +61,7 @@
 
 .button:disabled {
   opacity: 0.5;
-  cursor: not-allowed;
+  pointer-events: none;
   background-position: inherit;
 }
 
