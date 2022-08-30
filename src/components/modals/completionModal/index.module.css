@@ -65,7 +65,13 @@
 }
 
 .action-buttons button:nth-of-type(1) {
-  margin-right: 20px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.action-buttons button:nth-of-type(2) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .good {
@@ -74,4 +80,20 @@
 
 .bad {
   color: var(--red-color);
+}
+
+@media screen and (min-width: 400px) {
+  .action-buttons {
+    display: flex;
+    margin-top: 15px;
+  }
+
+  .action-buttons button:nth-of-type(1) {
+    border-radius: 5px;
+    margin-right: 20px;
+  }
+
+  .action-buttons button:nth-of-type(2) {
+    border-radius: 5px;
+  }
 }

@@ -15,10 +15,12 @@
 }
 
 .modal-container {
+  width: 100%;
   margin: 20px;
-  padding: 30px 20px;
   display: flex;
+  min-width: 300px;
   min-height: 300px;
+  padding: 30px 20px;
   background: #fff;
   position: relative;
   align-items: center;
@@ -28,12 +30,12 @@
   transform: 0.5s ease-in-out;
 }
 
-.action{
-  width: 500px;
+.action {
+  max-width: 500px;
 }
 
-.info{
-  width: 470px;
+.info {
+  max-width: 470px;
 }
 
 .header-container {
