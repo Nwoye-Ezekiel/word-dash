@@ -25,15 +25,6 @@ export default function SetupModal({
   const [inputChanges, setInputChanges] = useState(customWords);
   const [selectedOption, setSelectedOption] = useState(timer);
 
-  const handleValidation = () => {
-    return (
-      selectedOption === timer &&
-      (inputChanges.trim() === customWords ||
-        inputChanges.trim().length === 0 ||
-        inputChanges.trim().length > 150)
-    );
-  };
-
   const handleAppliedChanges = () => {
     createQuote(inputChanges);
     createTimer(selectedOption);
@@ -100,7 +91,10 @@ export default function SetupModal({
           </div>
         </div>
         <Button
-          disabled={handleValidation()}
+          disabled={
+            (selectedOption === timer && inputChanges.trim() === customWords) ||
+            inputChanges.trim().length === 0
+          }
           onClick={handleAppliedChanges}
           variant="primary2"
         >
