@@ -39,7 +39,7 @@
 }
 
 .danger {
-  color: var(--red-color-light);
+  color: var(--red-color);
 }
 
 .warning {
@@ -76,7 +76,7 @@
 }
 
 .bar-danger {
-  background-color: var(--red-color-light);
+  background-color: var(--red-color);
 }
 
 .bar-warning {
@@ -176,12 +176,12 @@
 }
 
 .incorrect {
-  color: var(--red-color-light);
+  color: var(--red-color);
 }
 
 .alert {
-  color: var(--red-color-light);
-  border-bottom: 1px solid var(--red-color-light);
+  color: var(--red-color);
+  border-bottom: 1px solid var(--red-color);
 }
 
 .underline {
