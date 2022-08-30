@@ -52,7 +52,9 @@ export default function SetupModal({
             className={styles["input-container"]}
             maxLength={150}
           />
-          <div className={styles["character-count"]}>{inputChanges.length}</div>
+          <div className={styles["character-count"]}>
+            {150 - inputChanges.length}
+          </div>
         </div>
         <div className={styles["timer-wrapper"]}>
           <div className={styles["timer-header"]}>
