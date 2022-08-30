@@ -271,14 +271,14 @@ export default function Play() {
               ))
             )}
           </div>
-          {status !== "started" && (
-            <p
-              className={styles["fetch-quote"]}
-              onClick={() => generateNewQuote()}
-            >
-              Get New Quote
-            </p>
-          )}
+          <p
+            className={`${styles["fetch-quote"]} ${
+              styles[`${(status === "started" || loading) && "disable"}`]
+            }`}
+            onClick={() => generateNewQuote()}
+          >
+            Get New Quote
+          </p>
         </div>
         <textarea
           ref={textInput}
@@ -300,7 +300,11 @@ export default function Play() {
       <div className={styles["action-buttons"]}>
         {status !== "started" && (
           <>
-            <Button variant="outline" onClick={() => setSetupModal(true)}>
+            <Button
+              disabled={loading}
+              variant="outline"
+              onClick={() => setSetupModal(true)}
+            >
               Setup
             </Button>
             <Button disabled={loading || fetchError} onClick={start}>
