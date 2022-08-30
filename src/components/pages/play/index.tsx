@@ -136,7 +136,8 @@ export default function Play() {
     value = wordFormatter(value);
     const typedWord = value.split(" ").slice(displayedWordIndex).join(" ");
 
-    const inputType = value.charCodeAt( value.length - 1 ) === 32 ? 'space' : 'text'
+    const inputType =
+      value.charCodeAt(value.length - 1) === 32 ? "space" : "text";
 
     if (typedWord.length <= displayedWords[displayedWordIndex].length + 1) {
       setTypedWords(value);
@@ -283,9 +284,7 @@ export default function Play() {
           ref={textInput}
           value={typedWords}
           unselectable="on"
-          onChange={(e) => {
-            console.log(e)
-            handleInputChange(e.target.value)}}
+          onChange={(e) => handleInputChange(e.target.value)}
           className={styles["input-display"]}
           onKeyDown={(e) => {
             handleKeyDown(e);
