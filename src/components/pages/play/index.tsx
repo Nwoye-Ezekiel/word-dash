@@ -229,8 +229,6 @@ export default function Play() {
                     `${
                       count <= 5
                         ? "bar-danger"
-                        : count <= 10
-                        ? "bar-warning"
                         : "bar-safe"
                     }`
                   ]
