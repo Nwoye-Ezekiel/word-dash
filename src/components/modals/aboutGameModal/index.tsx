@@ -11,8 +11,8 @@ export default function AboutGameModal({ close }: { close: () => void }) {
           the fastest time possible.
         </p>
         <p>
-          In order to complete the game, the player must quickly type in words
-          accurately to avoid losing points.
+          To complete the game, the player must type fast and accurately, to
+          avoid losing points and amending errors.
         </p>
         <p>
           This game serves as both a challenge and a way to improve one&apos;s

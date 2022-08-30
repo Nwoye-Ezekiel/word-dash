@@ -33,6 +33,6 @@ You can as well view the project which is hosted on [vercel](https://vercel.com/
 
 Word dash is a typing game where players must type various texts in the fastest time possible.
 
-In order to complete the game, the player must quickly type in words accurately to avoid losing points.
+To complete the game, the player must type fast and accurately, to avoid losing points and amending errors.
 
 This game serves as both a challenge and a way to improve one&apos;s typing skills. Good luck!
