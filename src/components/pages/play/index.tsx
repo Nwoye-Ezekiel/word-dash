@@ -27,7 +27,6 @@ export default function Play() {
   const [showModal, setShowModal] = useState(false);
   const [setupModal, setSetupModal] = useState(false);
   const [completionModal, setCompletionModal] = useState(false);
-  const [inputType, setInputType] = useState<"space" | "text">("text");
   const [timer, setTimer] = useState(DEFAULT_TIME);
   const [count, { startCountdown, stopCountdown, resetCountdown }] =
     useCountdown({
@@ -101,10 +100,6 @@ export default function Play() {
         e.preventDefault();
       }
     }
-
-    if (e.code === "Space") {
-      setInputType("space");
-    } else setInputType("text");
   };
 
   function generateStyleClass(wordIndex: number, characterIndex: number) {
@@ -141,6 +136,8 @@ export default function Play() {
     value = wordFormatter(value);
     const typedWord = value.split(" ").slice(displayedWordIndex).join(" ");
 
+    const inputType = value.charCodeAt( value.length - 1 ) === 32 ? 'space' : 'text'
+
     if (typedWord.length <= displayedWords[displayedWordIndex].length + 1) {
       setTypedWords(value);
       setTypedWord(typedWord);
@@ -173,7 +170,6 @@ export default function Play() {
     setTypedWord("");
     setTypedWords("");
     setCorrectScore(0);
-    setInputType("text");
     setWordError(false);
     setWordErrorIndexes([]);
   };
@@ -192,7 +188,6 @@ export default function Play() {
     setTypedWord("");
     setTypedWords("");
     setCorrectScore(0);
-    setInputType("text");
     setWordError(false);
     setWordErrorIndexes([]);
   };
@@ -288,7 +283,9 @@ export default function Play() {
           ref={textInput}
           value={typedWords}
           unselectable="on"
-          onChange={(e) => handleInputChange(e.target.value)}
+          onChange={(e) => {
+            console.log(e)
+            handleInputChange(e.target.value)}}
           className={styles["input-display"]}
           onKeyDown={(e) => {
             handleKeyDown(e);
