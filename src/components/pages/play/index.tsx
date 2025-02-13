@@ -5,11 +5,12 @@ import Button from "../../button";
 import { motion } from "framer-motion";
 import styles from "./index.module.css";
 import { useCountdown } from "usehooks-ts";
-import { fetchRandomQuote } from "../../../apis";
+import { fetchRandomQuote } from "../../../api";
 import SetupModal from "../../modals/setupModal";
 import CompletionModal from "../../modals/completionModal";
 import InstructionModal from "../../modals/instructionModal";
 import { wordFormatter } from "../../../helpers/wordFormatter";
+import { MAX_CHARACTER_COUNT } from "../../../constants";
 
 export default function Play() {
   const DEFAULT_TIME = 60;
@@ -28,6 +29,7 @@ export default function Play() {
   const [setupModal, setSetupModal] = useState(false);
   const [completionModal, setCompletionModal] = useState(false);
   const [timer, setTimer] = useState(DEFAULT_TIME);
+  const [author, setAuthor] = useState("");
   const [count, { startCountdown, stopCountdown, resetCountdown }] =
     useCountdown({
       countStart: timer,
@@ -69,11 +71,17 @@ export default function Play() {
   }, [count]);
 
   const generateNewQuote = async () => {
+    setFetchError(false);
+    setLoading(true);
+    setAuthor("");
     try {
-      setLoading(true);
-      let quote = await fetchRandomQuote();
-      createQuote(quote);
-      fetchError && setFetchError(false);
+      const { quote, author } = await fetchRandomQuote();
+      const truncatedQuote =
+        quote.length > MAX_CHARACTER_COUNT
+          ? `${quote.substring(0, MAX_CHARACTER_COUNT - 3).trim()}...`
+          : quote;
+      createQuote(truncatedQuote);
+      setAuthor(author);
     } catch (e) {
       setFetchError(true);
       setDisplayedWords([]);
@@ -103,33 +111,33 @@ export default function Play() {
   };
 
   function generateStyleClass(wordIndex: number, characterIndex: number) {
-    if (wordIndex < displayedWordIndex) {
-      if (wordErrorIndexes.includes(wordIndex)) {
-        return "incorrect";
-      } else {
-        return "correct";
-      }
-    } else if (wordIndex === displayedWordIndex) {
-      if (characterIndex < typedWord.length) {
-        if (
-          displayedWords[displayedWordIndex][characterIndex] ===
-            typedWord[characterIndex] &&
-          !(typedWord.length > displayedWords[displayedWordIndex].length)
-        ) {
+    if (wordIndex < displayedWordIndex) return "correct";
+
+    if (wordIndex === displayedWordIndex) {
+      const isWithinTypedWord = characterIndex < typedWord.length;
+      const isMatchingChar =
+        displayedWords[displayedWordIndex]?.[characterIndex] ===
+        typedWord[characterIndex];
+      const isOverTyped =
+        typedWord.length > displayedWords[displayedWordIndex].length;
+
+      if (isWithinTypedWord) {
+        if (isMatchingChar && !isOverTyped) {
           return "correct";
-        } else {
-          if (!wordError) {
-            setWordError(true);
-            setWordErrorIndexes([...wordErrorIndexes, displayedWordIndex]);
-          }
-          if (typedWord.length > displayedWords[displayedWordIndex].length)
-            return "alert";
-          else return "incorrect";
         }
-      } else if (characterIndex === typedWord.length) {
-        return "underline";
-      } else return "";
-    } else return "";
+
+        if (!wordError) {
+          setWordError(true);
+          setWordErrorIndexes([...wordErrorIndexes, displayedWordIndex]);
+        }
+
+        return isOverTyped ? "alert" : "incorrect";
+      }
+
+      return characterIndex === typedWord.length ? "underline" : "";
+    }
+
+    return "";
   }
 
   const handleInputChange = (value: string) => {
@@ -271,6 +279,7 @@ export default function Play() {
               ))
             )}
           </div>
+          {author && <p className={styles["author"]}>- {author}</p>}
           <p
             className={`${styles["fetch-quote"]} ${
               styles[`${(status === "started" || loading) && "disabled"}`]
@@ -283,12 +292,15 @@ export default function Play() {
         <textarea
           ref={textInput}
           value={typedWords}
-          unselectable="on"
-          onChange={(e) => handleInputChange(e.target.value)}
-          className={styles["input-display"]}
-          onKeyDown={(e) => {
-            handleKeyDown(e);
+          onChange={(e) => {
+            handleInputChange(e.target.value);
+
+            if (textInput.current) {
+              textInput.current.scrollTop = textInput.current.scrollHeight;
+            }
           }}
+          className={styles["input-display"]}
+          onKeyDown={(e) => handleKeyDown(e)}
           disabled={
             status === "waiting" ||
             status === "finished" ||

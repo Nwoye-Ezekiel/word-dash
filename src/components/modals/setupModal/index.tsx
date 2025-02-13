@@ -1,24 +1,25 @@
-import React, { useState } from "react";
-import styles from "./index.module.css";
 import ModalTemplate from "..";
 import Button from "../../button";
-import { timeConverter } from "../../../helpers/timeConverter";
 import toast from "react-hot-toast";
+import React, { useState } from "react";
+import styles from "./index.module.css";
+import { MAX_CHARACTER_COUNT } from "../../../constants";
+import { timeConverter } from "../../../helpers/timeConverter";
 
 interface SetupModalProps {
-  customWords: string;
   timer: number;
+  close: () => void;
+  customWords: string;
   createTimer: (value: number) => void;
   createQuote: (value: string) => void;
-  close: () => void;
 }
 
 export default function SetupModal({
-  customWords,
+  close,
   timer,
+  customWords,
   createTimer,
   createQuote,
-  close,
 }: SetupModalProps) {
   const options = [60, 45, 30];
   const difficulties = ["Easy", "Medium", "Hard"];
@@ -41,10 +42,10 @@ export default function SetupModal({
             defaultValue={customWords}
             onChange={(e) => setInputChanges(e.target.value)}
             className={styles["input-container"]}
-            maxLength={150}
+            maxLength={MAX_CHARACTER_COUNT}
           />
           <div className={styles["character-count"]}>
-            {150 - inputChanges.length}
+            {MAX_CHARACTER_COUNT - inputChanges.length}
           </div>
         </div>
         <div className={styles["timer-wrapper"]}>
